@@ -15,10 +15,12 @@ This document describes the functional specifications of the Spin Battle game.
 ### Scope
 The Spin Battle game is a 2D game where the player controls a spinning top and must defeat other spinning tops in a battle arena. The game is played in single player mode.
 
-### Inspiration
+### Inspiration and strory
 The game is inspired by the Beyblade series and the Beyblade games.
 <br><br>
 <img src="img/beyblade-burst.gif" with="100px"></img>
+
+**Story**: The player is a spinning top master who must defeat all the enemy spinning tops in the battle arena to become the ultimate spinning top master.
 
 ### Constraints
 The game must be developed following the constraints below:
@@ -37,10 +39,10 @@ The game is played in a battle arena. The player controls a spinning top and mus
 
 ### Game Controls
 The player can control the spinning top using the following controls:
-- W: move the spinning top forward
-- S: move the spinning top backward
-- A: rotate the spinning top to the left
-- D: rotate the spinning top to the right
+- W or arrow up: move the spinning top forward
+- S or arrow down: move the spinning top backward
+- A or arrow left: rotate the spinning top to the left
+- D or arrow right: rotate the spinning top to the right
 
 ### Game Visuals
 The game will have the following visuals:
