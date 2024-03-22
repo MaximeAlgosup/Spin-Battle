@@ -14,7 +14,7 @@ int main()
     // init objects
     Arena arena((sf::VideoMode::getDesktopMode().width/2), (sf::VideoMode::getDesktopMode().height/2), ARENA_RADIUS, 1, 0);
 
-    Spinner spinner(arena.getCenterX(), arena.getCenterY(), 10, 10, 10);
+    Spinner spinner(arena.getCenterX(), arena.getCenterY(), 10, 10, 2);
     // main loop
     while (window.isOpen()){
         // Events
@@ -46,6 +46,9 @@ int main()
                 spinner.moveDown();
             }
         }
+        else{
+            spinner.autoMove();
+        }
         // Actions
         arena.setSize();
 
@@ -65,6 +68,7 @@ int main()
         displayLevel(window, arena);
 
         // end the current frame
+        spinner.displayData();
         window.display();
     }
     while(!sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){

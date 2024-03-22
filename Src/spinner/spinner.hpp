@@ -7,6 +7,8 @@ class Spinner{
         int weight;
         int speed;
         int agility;
+        int direction;
+        int inertia;
         bool isDead;
 
     public:
@@ -113,6 +115,15 @@ class Spinner{
         void moveRight();
 
         /*
+            Move the spinner automatically following the inertia
+            params:
+                void
+            return:
+                void
+        */
+        void autoMove();
+
+        /*
             Check if the spinner is out of the arena
             params:
                 arena_x: x position of the arena
@@ -122,4 +133,13 @@ class Spinner{
                 bool: status of the spinner
         */
         bool isOut(int arena_x, int arena_y, int arena_radius);
+
+        /*
+            Display the spinner data
+            params:
+                void
+            return:
+                void
+        */
+        void displayData();
 };
