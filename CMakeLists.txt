@@ -1,12 +1,8 @@
-# How to use with mingw: (Windows)
-#   cmake -S . -B Build -G "MinGW Makefiles"
-#   cd Build
-#   mingw32-make
-
 # How to use with msys2: (Windows)
 #   cmake -S . -B Build -G "MSYS Makefiles"
 #   cd Build
 #   make
+
 cmake_minimum_required(VERSION 3.10)
 
 set(CMAKE_CXX_COMPILER "g++")
@@ -21,10 +17,11 @@ find_package(Threads REQUIRED)
 
 add_executable(Spin-Battle
     Src/main.cpp
-    Src/map/arena.cc
-    Src/spinner/spinner.cc
-    Src/spinner/player.cc
-    Src/spinner/bot.cc
+    Src/map/arena.cpp
+    Src/spinner/spinner.cpp
+    Src/spinner/player.cpp
+    Src/spinner/bot.cpp
+    Src/displayer/display.cpp
 )
 
 target_include_directories(Spin-Battle
@@ -32,6 +29,7 @@ target_include_directories(Spin-Battle
     "${CMAKE_CURRENT_SOURCE_DIR}/Src"
     "${CMAKE_CURRENT_SOURCE_DIR}/Src/map"
     "${CMAKE_CURRENT_SOURCE_DIR}/Src/spinner"
+    "${CMAKE_CURRENT_SOURCE_DIR}/Src/displayer"
 )
 
 target_link_libraries(Spin-Battle
@@ -40,6 +38,7 @@ target_link_libraries(Spin-Battle
     sfml-graphics
     sfml-window
     sfml-system
+    sfml-audio
 )
 
 target_compile_options(Spin-Battle
@@ -51,5 +50,4 @@ set_target_properties(Spin-Battle
   PROPERTIES
     CXX_STANDARD 17
     CXX_EXTENSIONS OFF
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin"
 )
