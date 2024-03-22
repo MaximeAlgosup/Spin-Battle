@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "arena.hpp"
+#include "spinner.hpp"
 
 /*
     Display the background of the game
@@ -40,3 +41,22 @@ void displayScore(sf::RenderWindow &window, Arena &arena);
         void
 */
 void displayLevel(sf::RenderWindow &window, Arena &arena);
+
+/*
+    Display the spinner
+    params:
+        window: the window to display the spinner
+        spinner: the spinner to display
+    return:
+        void
+*/
+void displaySpinner(sf::RenderWindow &window, Spinner &spinner);
+
+/*
+    Display the game over screen
+    params:
+        window: the window to display the game over screen
+    return:
+        void
+*/
+void displayGameOver(sf::RenderWindow &window);
