@@ -34,6 +34,17 @@ class Spinner{
         */
         Spinner(unsigned int x, unsigned int y, int w, int s, int a);
 
+        // Getters
+
+        /*
+            Get the distance between the spinner and another spinner
+            params:
+                spin: ennemy spinner
+            return:
+                int: distance between the spinner and another spinner
+        */
+        int getDistance(Spinner spin);
+
         /*
             Get the x position of the spinner
             params:

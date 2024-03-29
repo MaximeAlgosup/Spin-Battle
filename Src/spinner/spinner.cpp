@@ -18,6 +18,10 @@ Spinner::Spinner(unsigned int x, unsigned int y, int w, int s, int a) {
 
 // Getters
 
+int Spinner::getDistance(Spinner spin){
+    return sqrt(pow(abs(this->pos_x - spin.getPosX()), 2) + pow(abs(this->pos_y - spin.getPosY()), 2));
+}
+
 int Spinner::getPosX(){
     return this->pos_x;
 }
@@ -176,7 +180,7 @@ void Spinner::reverseDirection(){
 
 bool Spinner::isColliding(Spinner otherSpin){
     // Calculate the distance between the two spinners
-    float distance = sqrt(pow(abs(this->pos_x - otherSpin.getPosX()), 2) + pow(abs(this->pos_y - otherSpin.getPosY()), 2));
+    float distance = this->getDistance(otherSpin);
     // Check if the spinners are colliding
     if(distance < (this->radius + otherSpin.getRadius() + 10)){
         int contactSize = abs(distance - (this->radius + otherSpin.getRadius() + 10));

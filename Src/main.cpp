@@ -18,10 +18,10 @@ int main()
     Player player(arena.getCenterX(), arena.getCenterY(), 10, 5, 5);
     Bot bots[] = {
         Bot(1, true, arena.getCenterX()-120, arena.getCenterY(), 10, 5, 5),
-        Bot(1, true, arena.getCenterX(), arena.getCenterY()-120, 10, 5, 5),
-        Bot(1, true, arena.getCenterX()+120, arena.getCenterY(), 10, 5, 5),
-        Bot(1, true, arena.getCenterX(), arena.getCenterY()+120, 10, 5, 5),
-        Bot(1, true, arena.getCenterX()+120, arena.getCenterY()-180, 10, 5, 5)
+        Bot(2, true, arena.getCenterX(), arena.getCenterY()-120, 10, 5, 5),
+        Bot(3, true, arena.getCenterX()+120, arena.getCenterY(), 10, 5, 5),
+        Bot(4, true, arena.getCenterX(), arena.getCenterY()+120, 10, 5, 5),
+        Bot(5, true, arena.getCenterX()+120, arena.getCenterY()-180, 10, 5, 5)
     };
     // main loop
     while (window.isOpen()){
@@ -59,8 +59,27 @@ int main()
         }
         // Actions
         arena.setSize();
+        // Bots moves
         for(int i = 0; i < 5; i++){
-            bots[i].move();
+            bool asTarget = false;
+            if(bots[i].isClose(player)){
+                std::cout << "target" << std::endl;
+                bots[i].target(player);
+                asTarget = true;
+            }
+            else{
+                for(int j = 0; j < 5; j++){
+                    if(i != j){
+                        if(bots[i].isClose(bots[j])){
+                            bots[i].target(bots[j]);
+                            asTarget = true;
+                        }
+                    }
+                }
+            }
+            if(!asTarget){
+                bots[i].autoMove();
+            }
         }
 
         // Checker
@@ -76,8 +95,6 @@ int main()
             if(bots[i].isOut(arena.getCenterX(), arena.getCenterY(), arena.getRadius()) && bots[i].getInGame()){
                 arena.levelUp();
                 arena.scoreUp(10);
-                player.scoreUp(10);
-                player.levelUp();
                 bots[i].setInGame(false);
             }
         }

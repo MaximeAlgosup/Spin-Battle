@@ -6,6 +6,7 @@ class Bot : public Spinner {
     private:
         int level;
         bool inGame;
+        int visionDistance;
 
     public:
 
@@ -24,6 +25,23 @@ class Bot : public Spinner {
         */
         Bot(int level, bool ig, unsigned int x, unsigned int y, int w, int s, int a);
 
+        /*
+            Check if the bot is close to the spinner
+            params:
+                spin: spinner to check
+            return:
+                bool: true if the bot is close to the spinner, false otherwise
+        */
+        bool isClose(Spinner spin);
+
+        /*
+            Target the spinner
+            params:
+                spin: spinner to target
+            return:
+                void
+        */
+        void target(Spinner spin);
 
         /*
             Move the bot
@@ -32,7 +50,7 @@ class Bot : public Spinner {
             return:
                 void
         */
-        void move();
+        void autoMove();
 
         // Getters
 

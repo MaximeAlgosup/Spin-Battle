@@ -1,11 +1,56 @@
 #include "bot.hpp"
+#include <iostream>
 
 Bot::Bot(int level, bool ig, unsigned int x, unsigned int y, int w, int s, int a) : Spinner(x, y, w, s, a){
     this->level = level;
     this->inGame = ig;
+    switch (this->level)
+    {
+    case 1:
+        this->visionDistance = 75;
+        break;
+    case 2:
+        this->visionDistance = 125;
+        break;
+    case 3:
+        this->visionDistance = 150;
+        break;
+    case 4:
+        this->visionDistance = 175;
+        break;
+    default:
+        this->visionDistance = 200;
+        break;
+    }
 }
 
-void Bot::move(){
+bool Bot::isClose(Spinner spin){
+    int distance = this->getDistance(spin);
+    std::cout << "Distance: " << distance << std::endl;
+    std::cout << "Vision: " << this->visionDistance << std::endl;
+    std::cout << "Radius: " << spin.getRadius() << std::endl << std::endl;
+    if(distance < (this->visionDistance + spin.getRadius() + 5)){
+        return true;
+    }
+    return false;
+}
+
+void Bot::target(Spinner spin){
+    if(this->pos_x < spin.getPosX()){
+        this->moveRight();
+    }
+    else if(this->pos_x > spin.getPosX()){
+        this->moveLeft();
+    }
+    else if(this->pos_y < spin.getPosY()){
+        this->moveDown();
+    }
+    else if(this->pos_y > spin.getPosY()){
+        this->moveUp();
+    }
+}
+
+void Bot::autoMove(){
     // Move the bot
     if(this->inertia == 0){
         return;
