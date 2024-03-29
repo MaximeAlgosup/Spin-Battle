@@ -1,7 +1,8 @@
 #include "bot.hpp"
+#include <cmath>
 #include <iostream>
 
-Bot::Bot(int level, bool ig, unsigned int x, unsigned int y, int w, int s, int a) : Spinner(x, y, w, s, a){
+Bot::Bot(int level, bool ig, unsigned int x, unsigned int y, int w, int s, int i, int a) : Spinner(x, y, w, s, i, a){
     this->level = level;
     this->inGame = ig;
     switch (this->level)
@@ -36,25 +37,72 @@ bool Bot::isClose(Spinner spin){
 }
 
 void Bot::target(Spinner spin){
-    if(this->pos_x < spin.getPosX()){
-        this->moveRight();
+    int dist_x = this->pos_x - spin.getPosX();
+    int dist_y = this->pos_y - spin.getPosY();
+    if(abs(dist_x) > abs(dist_y)){
+        if(dist_x > 0){
+            if(this->direction == LEFT || this->inertia < this->agility){
+                this->direction = LEFT;
+                this->speed += 1;
+                if(this->speed > this->maxSpeed){
+                    this->speed = this->maxSpeed;
+                }
+                this->inertia = this->weight*pow(this->speed, 2);
+                if(this->inertia > this->maxInertia){
+                    this->inertia = this->maxInertia;
+                }
+            }
+            this->autoMove();
+        }
+        else{
+            if(this->direction == RIGHT || this->inertia < this->agility){
+                this->direction = RIGHT;
+                this->speed += 1;
+                if(this->speed > this->maxSpeed){
+                    this->speed = this->maxSpeed;
+                }
+                this->inertia = this->weight*pow(this->speed, 2);
+                if(this->inertia > this->maxInertia){
+                    this->inertia = this->maxInertia;
+                }
+            }
+            this->autoMove();
+        }
     }
-    else if(this->pos_x > spin.getPosX()){
-        this->moveLeft();
-    }
-    else if(this->pos_y < spin.getPosY()){
-        this->moveDown();
-    }
-    else if(this->pos_y > spin.getPosY()){
-        this->moveUp();
+    else{
+        if(dist_y > 0){
+            if(this->direction == UP || this->inertia < this->agility){
+                this->direction = UP;
+                this->speed += 1;
+                if(this->speed > this->maxSpeed){
+                    this->speed = this->maxSpeed;
+                }
+                this->inertia = this->weight*pow(this->speed, 2);
+                if(this->inertia > this->maxInertia){
+                    this->inertia = this->maxInertia;
+                }
+            }
+            this->autoMove();
+        }
+        else{
+            if(this->direction == DOWN || this->inertia < this->agility){
+                this->direction = DOWN;
+                this->speed += 1;
+                if(this->speed > this->maxSpeed){
+                    this->speed = this->maxSpeed;
+                }
+                this->inertia = this->weight*pow(this->speed, 2);
+                if(this->inertia > this->maxInertia){
+                    this->inertia = this->maxInertia;
+                }
+            }
+            this->autoMove();
+        }
     }
 }
 
 void Bot::autoMove(){
     // Move the bot
-    if(this->inertia == 0){
-        return;
-    }
     if(this->direction == UP){
         this->pos_y -= this->speed;
     }

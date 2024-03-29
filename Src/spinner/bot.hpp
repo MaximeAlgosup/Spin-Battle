@@ -19,11 +19,12 @@ class Bot : public Spinner {
                 y: y position of the spinner
                 w: weight of the spinner
                 s: max speed of the spinner
+                i: max inertia of the spinner
                 a: agility of the spinner
             return:
                 Bot object
         */
-        Bot(int level, bool ig, unsigned int x, unsigned int y, int w, int s, int a);
+        Bot(int level, bool ig, unsigned int x, unsigned int y, int w, int s, int i, int a);
 
         /*
             Check if the bot is close to the spinner

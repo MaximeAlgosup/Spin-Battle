@@ -2,7 +2,7 @@
 #include <cmath>
 #include <iostream>
 
-Spinner::Spinner(unsigned int x, unsigned int y, int w, int s, int a) {
+Spinner::Spinner(unsigned int x, unsigned int y, int w, int s, int i, int a) {
     this->pos_x = x;
     this->pos_y = y;
     this->weight = w;
@@ -12,6 +12,7 @@ Spinner::Spinner(unsigned int x, unsigned int y, int w, int s, int a) {
     this->isDead = false;
     this->radius = 20;
     this->direction = NONE;
+    this->maxInertia = i;
     this->inertia = 0;
     this->isDead = false;
 }
@@ -63,6 +64,9 @@ void Spinner::moveUp(){
     this->pos_y -= this->speed;
     this->direction = UP;
     this->inertia = this->weight*pow(this->speed, 2);
+    if(this->inertia > this->maxInertia){
+        this->inertia = this->maxInertia;
+    }
 }
 
 void Spinner::moveDown(){
@@ -76,12 +80,14 @@ void Spinner::moveDown(){
     this->pos_y += this->speed;
     this->direction = DOWN;
     this->inertia = this->weight*pow(this->speed, 2);
+    if(this->inertia > this->maxInertia){
+        this->inertia = this->maxInertia;
+    }
 }
 
 void Spinner::moveLeft(){
     if(this->inertia > this->agility && this->direction != LEFT){
         Spinner::autoMove();
-        this->pos_x -= this->agility;
         return;
     }
     if(this->speed < this->maxSpeed){
@@ -90,12 +96,14 @@ void Spinner::moveLeft(){
     this->pos_x -= this->speed;
     this->direction = LEFT;
     this->inertia = this->weight*pow(this->speed, 2);
+    if(this->inertia > this->maxInertia){
+        this->inertia = this->maxInertia;
+    }
 }
 
 void Spinner::moveRight(){
     if(this->inertia > this->agility && this->direction != RIGHT){
         Spinner::autoMove();
-        this->pos_x += this->agility;
         return;
     }
     if(this->speed < this->maxSpeed){
@@ -104,6 +112,9 @@ void Spinner::moveRight(){
     this->pos_x += this->speed;
     this->direction = RIGHT;
     this->inertia = this->weight*pow(this->speed, 2);
+    if(this->inertia > this->maxInertia){
+        this->inertia = this->maxInertia;
+    }
 }
 
 void Spinner::autoMove(){
@@ -124,7 +135,7 @@ void Spinner::autoMove(){
     }
 
     if(this->inertia > this->agility){
-        this->inertia -= this->agility;
+        this->inertia /= this->agility;
     }
     else{
         this->inertia = this->agility;
@@ -155,15 +166,29 @@ void Spinner::reverseDirection(){
 
  void Spinner::contact(Spinner *otherSpin){
     if(this->inertia > otherSpin->inertia){
-        this->inertia /= 1.5;
+        this->inertia /= 2;
         otherSpin->inertia += (this->inertia/2);
+        std::cout << "Other Spin Inertia:" << otherSpin->inertia << std::endl;
+        std::cout << "Other Spin Max Inertia:" << otherSpin->maxInertia << std::endl;
+        std::cout << "This Spin Inertia:" << this->inertia << std::endl;
+        std::cout << "This Spin Max Inertia:" << this->maxInertia << std::endl;
+        if(otherSpin->inertia > otherSpin->maxInertia){
+            otherSpin->inertia = otherSpin->maxInertia;
+        }
         otherSpin->speed += (this->speed/2);
         otherSpin->direction = this->direction;
         this->reverseDirection();
     }
-    else if(this->inertia < otherSpin->getWeight()){
-        otherSpin->inertia /= 1.5;
+    else if(this->inertia < otherSpin->inertia){
+        otherSpin->inertia /= 2;
         this->inertia += (otherSpin->inertia/2);
+        std::cout << "This Spin Inertia:" << this->inertia << std::endl;
+        std::cout << "This Spin Max Inertia:" << this->maxInertia << std::endl;
+        std::cout << "Other Spin Inertia:" << otherSpin->inertia << std::endl;
+        std::cout << "Other Spin Max Inertia:" << otherSpin->maxInertia << std::endl;
+        if(this->inertia > this->maxInertia){
+            this->inertia = this->maxInertia;
+        }
         this->speed += (otherSpin->speed/2);
         this->direction = otherSpin->direction;
         otherSpin->reverseDirection();

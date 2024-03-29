@@ -58,7 +58,7 @@ void displayPlayer(sf::RenderWindow &window, Player &player){
     // create a circle
     sf::CircleShape circle(player.getRadius());
     circle.setFillColor(sf::Color::Red);
-    circle.setOutlineColor(sf::Color::Blue);
+    circle.setOutlineColor(sf::Color::Green);
     circle.setOutlineThickness(5);
     circle.setPosition(player.getPosX()-player.getRadius()-5, player.getPosY()-player.getRadius()-5);
     // draw the circle
@@ -68,8 +68,8 @@ void displayPlayer(sf::RenderWindow &window, Player &player){
 void displayBot(sf::RenderWindow &window, Bot &bot){
     // create a circle
     sf::CircleShape circle(bot.getRadius());
-    circle.setFillColor(sf::Color::Red);
-    circle.setOutlineColor(sf::Color::Blue);
+    circle.setFillColor(sf::Color::Green);
+    circle.setOutlineColor(sf::Color::Red);
     circle.setOutlineThickness(5);
     circle.setPosition(bot.getPosX()-bot.getRadius()-5, bot.getPosY()-bot.getRadius()-5);
     // draw the circle

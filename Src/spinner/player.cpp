@@ -1,6 +1,6 @@
 #include "player.hpp"
 
-Player::Player(unsigned int x, unsigned int y, int w, int s, int a) : Spinner(x, y, w, s, a) {
+Player::Player(unsigned int x, unsigned int y, int w, int s, int i, int a) : Spinner(x, y, w, s, i, a) {
     this->score = 0;
     this->level = 1;
 }

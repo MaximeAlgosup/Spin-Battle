@@ -17,6 +17,7 @@ class Spinner{
         int speed;
         int agility;
         enum Direction direction;
+        int maxInertia;
         int inertia;
         bool isDead;
 
@@ -28,11 +29,12 @@ class Spinner{
                 y: y position of the spinner
                 w: weight of the spinner
                 s: max speed of the spinner
+                i: max inertia of the spinner
                 a: agility of the spinner
             return:
                 Spinner object
         */
-        Spinner(unsigned int x, unsigned int y, int w, int s, int a);
+        Spinner(unsigned int x, unsigned int y, int w, int s, int i, int a);
 
         // Getters
 

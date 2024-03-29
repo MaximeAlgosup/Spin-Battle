@@ -15,13 +15,13 @@ int main()
     // init objects
     Arena arena((sf::VideoMode::getDesktopMode().width/2), (sf::VideoMode::getDesktopMode().height/2), ARENA_RADIUS, 1, 0);
 
-    Player player(arena.getCenterX(), arena.getCenterY(), 10, 5, 5);
+    Player player(arena.getCenterX(), arena.getCenterY(), 15, 5, 10000, 5);
     Bot bots[] = {
-        Bot(1, true, arena.getCenterX()-120, arena.getCenterY(), 10, 5, 5),
-        Bot(2, true, arena.getCenterX(), arena.getCenterY()-120, 10, 5, 5),
-        Bot(3, true, arena.getCenterX()+120, arena.getCenterY(), 10, 5, 5),
-        Bot(4, true, arena.getCenterX(), arena.getCenterY()+120, 10, 5, 5),
-        Bot(5, true, arena.getCenterX()+120, arena.getCenterY()-180, 10, 5, 5)
+        Bot(3, true, arena.getCenterX()-120, arena.getCenterY(), 10, 5, 20000, 5),
+        Bot(3, true, arena.getCenterX(), arena.getCenterY()-120, 10, 5, 20000, 5),
+        Bot(3, true, arena.getCenterX()+120, arena.getCenterY(), 10, 5, 20000, 5),
+        Bot(3, true, arena.getCenterX(), arena.getCenterY()+120, 10, 5, 20000, 5),
+        Bot(3, true, arena.getCenterX()+120, arena.getCenterY()-180, 10, 5, 20000, 5)
     };
     // main loop
     while (window.isOpen()){
@@ -65,21 +65,17 @@ int main()
             if(bots[i].isClose(player)){
                 std::cout << "target" << std::endl;
                 bots[i].target(player);
-                asTarget = true;
             }
             else{
                 for(int j = 0; j < 5; j++){
                     if(i != j){
                         if(bots[i].isClose(bots[j])){
                             bots[i].target(bots[j]);
-                            asTarget = true;
                         }
                     }
                 }
             }
-            if(!asTarget){
-                bots[i].autoMove();
-            }
+            bots[i].autoMove();
         }
 
         // Checker
