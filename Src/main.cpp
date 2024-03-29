@@ -81,14 +81,23 @@ int main()
                 bots[i].setInGame(false);
             }
         }
-        // Check if there is a collision
+        // Check if there is a collision between the player and the bots
         for(int i = 0; i < 5; i++){
             if(player.isColliding(bots[i])){
-                std::cout << "Collision" << std::endl;
                 player.contact(&bots[i]);
             }
         }
         
+        // Check if there is a collision between the bots
+        for(int i = 0; i < 5; i++){
+            for(int j = 0; j < 5; j++){
+                if(i != j){
+                    if(bots[i].isColliding(bots[j])){
+                        bots[i].contact(&bots[j]);
+                    }
+                }
+            }
+        }
 
 
         // Draws

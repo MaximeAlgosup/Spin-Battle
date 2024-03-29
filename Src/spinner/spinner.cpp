@@ -179,6 +179,26 @@ bool Spinner::isColliding(Spinner otherSpin){
     float distance = sqrt(pow(abs(this->pos_x - otherSpin.getPosX()), 2) + pow(abs(this->pos_y - otherSpin.getPosY()), 2));
     // Check if the spinners are colliding
     if(distance < (this->radius + otherSpin.getRadius() + 10)){
+        int contactSize = abs(distance - (this->radius + otherSpin.getRadius() + 10));
+        if( contactSize > 0){
+            switch (this->direction)
+            {
+            case UP:
+                this->pos_y += contactSize;
+                break;
+            case DOWN:
+                this->pos_y -= contactSize;
+                break;
+            case LEFT:
+                this->pos_x += contactSize;
+                break;
+            case RIGHT:
+                this->pos_x -= contactSize;
+                break;
+            default:
+                break;
+            }
+        }
         return true;
     }
     return false;
