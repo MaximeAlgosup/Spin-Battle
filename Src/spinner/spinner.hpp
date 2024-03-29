@@ -1,18 +1,37 @@
 #pragma once
 
+enum Direction{
+            UP,
+            DOWN,
+            LEFT,
+            RIGHT,
+            NONE
+        };
+
 class Spinner{
     protected:
         int radius;
         unsigned int pos_x, pos_y;
         int weight;
+        int maxSpeed;
         int speed;
         int agility;
-        int direction;
+        enum Direction direction;
         int inertia;
         bool isDead;
 
     public:
-
+        /*
+            Constructor
+            params:
+                x: x position of the spinner
+                y: y position of the spinner
+                w: weight of the spinner
+                s: max speed of the spinner
+                a: agility of the spinner
+            return:
+                void
+        */
         Spinner(unsigned int x, unsigned int y, int w, int s, int a);
 
         /*

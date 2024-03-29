@@ -6,11 +6,12 @@ Spinner::Spinner(unsigned int x, unsigned int y, int w, int s, int a) {
     this->pos_x = x;
     this->pos_y = y;
     this->weight = w;
-    this->speed = s;
+    this->maxSpeed = s;
+    this->speed = 0;
     this->agility = a;
     this->isDead = false;
     this->radius = 20;
-    this->direction = 0;
+    this->direction = NONE;
     this->inertia = 0;
 }
 
@@ -47,49 +48,87 @@ bool Spinner::getIsDead(){
 // Setters
 
 void Spinner::moveUp(){
+    if(this->inertia > this->agility && this->direction == DOWN){
+        Spinner::autoMove();
+        return;
+    }
+    if(this->speed < this->maxSpeed){
+        this->speed += 1;
+    }
     this->pos_y -= this->speed;
-    this->direction = 1;
-    this->inertia = this->weight;
+    this->direction = UP;
+    this->inertia = this->weight*pow(this->speed, 2);
 }
 
 void Spinner::moveDown(){
+    if(this->inertia > this->agility && this->direction == UP){
+        Spinner::autoMove();
+        return;
+    }
+    if(this->speed < this->maxSpeed){
+        this->speed += 1;
+    }
     this->pos_y += this->speed;
-    this->direction = 2;
-    this->inertia = this->weight;
+    this->direction = DOWN;
+    this->inertia = this->weight*pow(this->speed, 2);
 }
 
 void Spinner::moveLeft(){
+    if(this->inertia > this->agility && this->direction == RIGHT){
+        Spinner::autoMove();
+        this->pos_x -= this->agility;
+        return;
+    }
+    if(this->speed < this->maxSpeed){
+        this->speed += 1;
+    }
     this->pos_x -= this->speed;
-    this->direction = 3;
-    this->inertia = this->weight;
+    this->direction = LEFT;
+    this->inertia = this->weight*pow(this->speed, 2);
 }
 
 void Spinner::moveRight(){
+    if(this->inertia > this->agility && this->direction == LEFT){
+        Spinner::autoMove();
+        this->pos_x += this->agility;
+        return;
+    }
+    if(this->speed < this->maxSpeed){
+        this->speed += 1;
+    }
     this->pos_x += this->speed;
-    this->direction = 4;
-    this->inertia = this->weight;
+    this->direction = RIGHT;
+    this->inertia = this->weight*pow(this->speed, 2);
 }
 
 void Spinner::autoMove(){
     if(this->inertia == 0){
         return;
     }
-    if(this->direction == 1){
+    if(this->direction == UP){
         this->pos_y -= this->speed;
     }
-    else if(this->direction == 2){
+    else if(this->direction == DOWN){
         this->pos_y += this->speed;
     }
-    else if(this->direction == 3){
+    else if(this->direction == LEFT){
         this->pos_x -= this->speed;
     }
-    else if(this->direction == 4){
+    else if(this->direction == RIGHT){
         this->pos_x += this->speed;
     }
-    else{
-        this->moveUp();
+    if(this->inertia > this->agility){
+        this->inertia -= this->agility;
     }
-    this->inertia -= this->agility;
+    else{
+        this->inertia = this->agility;
+    }
+    if(this->speed > 1){
+        this->speed -= 1;
+    }
+    else{
+        this->speed = 1;
+    }
 }
 
 bool Spinner::isOut(int arena_x, int arena_y, int arena_radius){

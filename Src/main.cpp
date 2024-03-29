@@ -14,7 +14,7 @@ int main()
     // init objects
     Arena arena((sf::VideoMode::getDesktopMode().width/2), (sf::VideoMode::getDesktopMode().height/2), ARENA_RADIUS, 1, 0);
 
-    Spinner spinner(arena.getCenterX(), arena.getCenterY(), 10, 10, 2);
+    Spinner spinner(arena.getCenterX(), arena.getCenterY(), 10, 5, 5);
     // main loop
     while (window.isOpen()){
         // Events
@@ -53,6 +53,8 @@ int main()
         arena.setSize();
 
         // Checker
+
+        // Check if the spinner is out of the arena
         if(spinner.isOut(arena.getCenterX(), arena.getCenterY(), arena.getRadius())){
             displayGameOver(window);
             window.display();
@@ -68,7 +70,6 @@ int main()
         displayLevel(window, arena);
 
         // end the current frame
-        spinner.displayData();
         window.display();
     }
     while(!sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
