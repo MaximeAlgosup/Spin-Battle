@@ -1,7 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "arena.hpp"
-#include "spinner.hpp"
+#include "player.hpp"
+#include "bot.hpp"
 
 /*
     Display the background of the game
@@ -43,14 +44,24 @@ void displayScore(sf::RenderWindow &window, Arena &arena);
 void displayLevel(sf::RenderWindow &window, Arena &arena);
 
 /*
-    Display the spinner
+    Display the player
     params:
-        window: the window to display the spinner
-        spinner: the spinner to display
+        window: the window to display the player
+        player: the player to display
     return:
         void
 */
-void displaySpinner(sf::RenderWindow &window, Spinner &spinner);
+void displayPlayer(sf::RenderWindow &window, Player &player);
+
+/*
+    Display the bot
+    params:
+        window: the window to display the bot
+        bot: the bot to display
+    return:
+        void
+*/
+void displayBot(sf::RenderWindow &window, Bot &bot);
 
 /*
     Display the game over screen

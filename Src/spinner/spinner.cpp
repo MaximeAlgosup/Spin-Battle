@@ -13,6 +13,7 @@ Spinner::Spinner(unsigned int x, unsigned int y, int w, int s, int a) {
     this->radius = 20;
     this->direction = NONE;
     this->inertia = 0;
+    this->isDead = false;
 }
 
 // Getters
@@ -48,7 +49,7 @@ bool Spinner::getIsDead(){
 // Setters
 
 void Spinner::moveUp(){
-    if(this->inertia > this->agility && this->direction == DOWN){
+    if(this->inertia > this->agility && this->direction != UP){
         Spinner::autoMove();
         return;
     }
@@ -61,7 +62,7 @@ void Spinner::moveUp(){
 }
 
 void Spinner::moveDown(){
-    if(this->inertia > this->agility && this->direction == UP){
+    if(this->inertia > this->agility && this->direction != DOWN){
         Spinner::autoMove();
         return;
     }
@@ -74,7 +75,7 @@ void Spinner::moveDown(){
 }
 
 void Spinner::moveLeft(){
-    if(this->inertia > this->agility && this->direction == RIGHT){
+    if(this->inertia > this->agility && this->direction != LEFT){
         Spinner::autoMove();
         this->pos_x -= this->agility;
         return;
@@ -88,7 +89,7 @@ void Spinner::moveLeft(){
 }
 
 void Spinner::moveRight(){
-    if(this->inertia > this->agility && this->direction == LEFT){
+    if(this->inertia > this->agility && this->direction != RIGHT){
         Spinner::autoMove();
         this->pos_x += this->agility;
         return;
@@ -117,18 +118,70 @@ void Spinner::autoMove(){
     else if(this->direction == RIGHT){
         this->pos_x += this->speed;
     }
+
     if(this->inertia > this->agility){
         this->inertia -= this->agility;
     }
     else{
         this->inertia = this->agility;
     }
+
     if(this->speed > 1){
         this->speed -= 1;
     }
     else{
         this->speed = 1;
     }
+}
+
+void Spinner::reverseDirection(){
+    if(this->direction == UP){
+        this->direction = DOWN;
+    }
+    else if(this->direction == DOWN){
+        this->direction = UP;
+    }
+    else if(this->direction == LEFT){
+        this->direction = RIGHT;
+    }
+    else if(this->direction == RIGHT){
+        this->direction = LEFT;
+    }
+}
+
+ void Spinner::contact(Spinner *otherSpin){
+    if(this->inertia > otherSpin->inertia){
+        this->inertia /= 1.5;
+        otherSpin->inertia += (this->inertia/2);
+        otherSpin->speed += (this->speed/2);
+        otherSpin->direction = this->direction;
+        this->reverseDirection();
+    }
+    else if(this->inertia < otherSpin->getWeight()){
+        otherSpin->inertia /= 1.5;
+        this->inertia += (otherSpin->inertia/2);
+        this->speed += (otherSpin->speed/2);
+        this->direction = otherSpin->direction;
+        otherSpin->reverseDirection();
+    }
+    else{
+        this->inertia *= 4;
+        otherSpin->inertia *= 4;
+        this->speed *= 4;
+        otherSpin->speed *= 4;
+        this->reverseDirection();
+        otherSpin->reverseDirection();
+    }
+ }
+
+bool Spinner::isColliding(Spinner otherSpin){
+    // Calculate the distance between the two spinners
+    float distance = sqrt(pow(abs(this->pos_x - otherSpin.getPosX()), 2) + pow(abs(this->pos_y - otherSpin.getPosY()), 2));
+    // Check if the spinners are colliding
+    if(distance < (this->radius + otherSpin.getRadius() + 10)){
+        return true;
+    }
+    return false;
 }
 
 bool Spinner::isOut(int arena_x, int arena_y, int arena_radius){

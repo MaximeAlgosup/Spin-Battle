@@ -54,13 +54,24 @@ void displayLevel(sf::RenderWindow &window, Arena &arena){
     window.draw(text);
 }
 
-void displaySpinner(sf::RenderWindow &window, Spinner &spinner){
+void displayPlayer(sf::RenderWindow &window, Player &player){
     // create a circle
-    sf::CircleShape circle(spinner.getRadius());
+    sf::CircleShape circle(player.getRadius());
     circle.setFillColor(sf::Color::Red);
     circle.setOutlineColor(sf::Color::Blue);
     circle.setOutlineThickness(5);
-    circle.setPosition(spinner.getPosX()-spinner.getRadius()-5, spinner.getPosY()-spinner.getRadius()-5);
+    circle.setPosition(player.getPosX()-player.getRadius()-5, player.getPosY()-player.getRadius()-5);
+    // draw the circle
+    window.draw(circle);
+}
+
+void displayBot(sf::RenderWindow &window, Bot &bot){
+    // create a circle
+    sf::CircleShape circle(bot.getRadius());
+    circle.setFillColor(sf::Color::Red);
+    circle.setOutlineColor(sf::Color::Blue);
+    circle.setOutlineThickness(5);
+    circle.setPosition(bot.getPosX()-bot.getRadius()-5, bot.getPosY()-bot.getRadius()-5);
     // draw the circle
     window.draw(circle);
 }

@@ -30,7 +30,7 @@ class Spinner{
                 s: max speed of the spinner
                 a: agility of the spinner
             return:
-                void
+                Spinner object
         */
         Spinner(unsigned int x, unsigned int y, int w, int s, int a);
 
@@ -141,6 +141,34 @@ class Spinner{
                 void
         */
         void autoMove();
+
+        /*
+            Reverse the direction of the spinner
+            params:
+                void
+            return:
+                void
+        */
+        void reverseDirection();
+
+
+        /*
+            Change speed and direction of the spinner following the other spinner inertia
+            params:
+                otherSpin: ennemy spinner
+            return:
+                void
+        */
+        void contact(Spinner *otherSpin);
+
+        /*
+            Check if the spinner is colliding with another spinner
+            params:
+                otherSpin: ennemy spinner
+            return:
+                bool: status of the spinner
+        */
+        bool isColliding(Spinner otherSpin);
 
         /*
             Check if the spinner is out of the arena

@@ -3,7 +3,8 @@
 
 #include "display.hpp"
 #include "arena.hpp"
-#include "spinner.hpp"
+#include "player.hpp"
+#include "bot.hpp"
 
 #define ARENA_RADIUS 300
 
@@ -14,7 +15,14 @@ int main()
     // init objects
     Arena arena((sf::VideoMode::getDesktopMode().width/2), (sf::VideoMode::getDesktopMode().height/2), ARENA_RADIUS, 1, 0);
 
-    Spinner spinner(arena.getCenterX(), arena.getCenterY(), 10, 5, 5);
+    Player player(arena.getCenterX(), arena.getCenterY(), 10, 5, 5);
+    Bot bots[] = {
+        Bot(1, true, arena.getCenterX()-120, arena.getCenterY(), 10, 5, 5),
+        Bot(1, true, arena.getCenterX(), arena.getCenterY()-120, 10, 5, 5),
+        Bot(1, true, arena.getCenterX()+120, arena.getCenterY(), 10, 5, 5),
+        Bot(1, true, arena.getCenterX(), arena.getCenterY()+120, 10, 5, 5),
+        Bot(1, true, arena.getCenterX()+120, arena.getCenterY()-180, 10, 5, 5)
+    };
     // main loop
     while (window.isOpen()){
         // Events
@@ -27,45 +35,71 @@ int main()
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
             // Check if the spinner is out of the screen
-            if((spinner.getPosX() - spinner.getRadius()) > 10){
-                spinner.moveLeft();
+            if((player.getPosX() - player.getRadius()) > 10){
+                player.moveLeft();
             }
         }
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
-            if((spinner.getPosX() + spinner.getRadius()) < sf::VideoMode::getDesktopMode().width){
-                spinner.moveRight();
+            if((player.getPosX() + player.getRadius()) < sf::VideoMode::getDesktopMode().width){
+                player.moveRight();
             }
         }
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W)){
-            if((spinner.getPosY() - spinner.getRadius()) > 10){
-                spinner.moveUp();
+            if((player.getPosY() - player.getRadius()) > 10){
+                player.moveUp();
             }
         }
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
-            if((spinner.getPosY() + spinner.getRadius()) < sf::VideoMode::getDesktopMode().height){
-                spinner.moveDown();
+            if((player.getPosY() + player.getRadius()) < sf::VideoMode::getDesktopMode().height){
+                player.moveDown();
             }
         }
         else{
-            spinner.autoMove();
+            player.autoMove();
         }
         // Actions
         arena.setSize();
+        for(int i = 0; i < 5; i++){
+            bots[i].move();
+        }
 
         // Checker
 
-        // Check if the spinner is out of the arena
-        if(spinner.isOut(arena.getCenterX(), arena.getCenterY(), arena.getRadius())){
+        // Check if the player is out of the arena
+        if(player.isOut(arena.getCenterX(), arena.getCenterY(), arena.getRadius())){
             displayGameOver(window);
             window.display();
             break;
         }
+        // Check if the bots are out of the screen
+        for(int i = 0; i < 5; i++){
+            if(bots[i].isOut(arena.getCenterX(), arena.getCenterY(), arena.getRadius()) && bots[i].getInGame()){
+                arena.levelUp();
+                arena.scoreUp(10);
+                player.scoreUp(10);
+                player.levelUp();
+                bots[i].setInGame(false);
+            }
+        }
+        // Check if there is a collision
+        for(int i = 0; i < 5; i++){
+            if(player.isColliding(bots[i])){
+                std::cout << "Collision" << std::endl;
+                player.contact(&bots[i]);
+            }
+        }
+        
 
 
         // Draws
         displayBackground(window);
         displayArena(window, arena);
-        displaySpinner(window, spinner);
+        for(int i = 0; i < 5; i++){
+            if(!bots[i].getIsDead()){
+                displayBot(window, bots[i]);
+            }
+        }
+        displayPlayer(window, player);
         displayScore(window, arena);
         displayLevel(window, arena);
 
