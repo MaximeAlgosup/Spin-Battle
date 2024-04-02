@@ -46,6 +46,15 @@ class Player : public Spinner {
         // Setters
 
         /*
+            Set if the player is dead
+            params:
+                dead: true if the player is dead, false otherwise
+            return:
+                void
+        */
+        void setDead(bool dead);
+
+        /*
             Increase the score of the player
             params:
                 points: points to increase the score
@@ -53,6 +62,16 @@ class Player : public Spinner {
                 void
         */
         void scoreUp(int points);
+
+
+        /*
+            Reset the score of the player
+            params:
+                void
+            return:
+                void
+        */
+        void resetScore();
 
         /*
             Increase the level of the player

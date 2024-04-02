@@ -69,6 +69,17 @@ void displayScore1(sf::RenderWindow *window, Arena *arena, Player *player);
 void displayScore2(sf::RenderWindow *window, Arena *arena, Player *player);
 
 /*
+    Display the time
+    params:
+        window: the window to display the time
+        arena: the arena to display the time
+        time: the time to display
+    return:
+        void
+*/
+void displayTime(sf::RenderWindow *window, Arena *arena, int time);
+
+/*
     Display the player
     params:
         window: the window to display the player
@@ -101,7 +112,18 @@ void displayGameOver(sf::RenderWindow *window);
     Display the win screen
     params:
         window: the window to display the win screen
+        player: the player who win
     return:
         void
 */
-void displayWin(sf::RenderWindow *window);
+void displayWin(sf::RenderWindow *window, int player);
+
+
+/*
+    Display the draw screen
+    params:
+        window: the window to display the draw screen
+    return:
+        void
+*/
+void displayDraw(sf::RenderWindow *window);

@@ -1,6 +1,7 @@
 #include "party.hpp"
 #include "display.hpp"
 #include <iostream>
+#include <chrono>
 #include <SFML/Graphics.hpp>
 
 Party::Party(Player *player1, Player *player2, Arena *arena, sf::RenderWindow *window){
@@ -8,10 +9,20 @@ Party::Party(Player *player1, Player *player2, Arena *arena, sf::RenderWindow *w
     this->player2 = player2;
     this->arena = arena;
     this->window = window;
+    this->time = 100;
+}
+
+Party::Party(Player *player1, Player *player2, Arena *arena, sf::RenderWindow *window, int time){
+    this->player1 = player1;
+    this->player2 = player2;
+    this->arena = arena;
+    this->window = window;
+    this->time = time;
 }
 
 void Party::run(){
     this->arena->playMusic();
+    auto start = std::chrono::system_clock::now();
     while(window->isOpen()){
         // Events
         keybordEvent();
@@ -35,8 +46,41 @@ void Party::run(){
             }
         }
 
+        // Check if the spinner is out of the arena
+        if(player1->isOut(arena->getCenterX(), arena->getCenterY(), arena->getRadius())){
+            player1->setDead(true);
+            player1->resetScore();
+            time = 0;
+        }
+        else if(player2->isOut(arena->getCenterX(), arena->getCenterY(), arena->getRadius())){
+            player2->setDead(true);
+            player2->resetScore();
+            time = 0;
+        }
+        else{
+            // time management
+            auto end = std::chrono::system_clock::now();
+            std::chrono::duration<double> elapsed_seconds = end-start;
+            if(elapsed_seconds.count() > 1){
+                start = std::chrono::system_clock::now();
+                time--;
+            }
+        }
         // visual update
         update();
+        if(time == 0){
+            displayTime(window, arena, time);
+            break;
+        }
+    }
+    if(player1->getScore() > player2->getScore()){
+        win(1);
+    }
+    else if(player1->getScore() < player2->getScore()){
+        win(2);
+    }
+    else{
+        equality();
     }
     this->arena->stopMusic();
 }
@@ -110,20 +154,30 @@ void Party::update(){
     displayPlayer(window, player2);
     displayScore1(window, arena, player1);
     displayScore2(window, arena, player2);
+    displayTime(window, arena, time);
     // end the current frame
     window->display();  
 }
 
-void Party::win(){
+void Party::win(int player){
+    bool isdisplayed = false;
     while(!sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
-        displayWin(window);
-        window->display();
+        displayWin(window, player);
+        if(!isdisplayed){
+            isdisplayed = true;
+            window->display();
+        }
     }
 }
 
-void Party::lose(){
-     while(!sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
-        displayGameOver(window);
-        window->display();
+void Party::equality(){
+    bool isdisplayed = false;
+    while(!sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
+        displayDraw(window);
+        if(!isdisplayed){
+            isdisplayed = true;
+            window->display();
+        }
     }
 }
+

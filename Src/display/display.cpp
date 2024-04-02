@@ -87,7 +87,7 @@ void displayScore1(sf::RenderWindow *window, Arena *arena, Player *player){
     text.setString("Score: " + std::to_string(player->getScore()));
     text.setCharacterSize(70);
     text.setFillColor(arena->getFontColor());
-    text.setPosition(10, 10);
+    text.setPosition(10, 110);
     // draw the text
     window->draw(text);
 }
@@ -104,7 +104,24 @@ void displayScore2(sf::RenderWindow *window, Arena *arena, Player *player){
     text.setString("Score: " + std::to_string(player->getScore()));
     text.setCharacterSize(70);
     text.setFillColor(arena->getFontColor());
-    text.setPosition(10, 110);
+    text.setPosition(10, 210);
+    // draw the text
+    window->draw(text);
+}
+
+void displayTime(sf::RenderWindow *window, Arena *arena, int time){
+    // create a text
+    sf::Font font;
+    if(!font.loadFromFile(arena->getFontPath())){
+        std::cerr << "Error loading font" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+    sf::Text text;
+    text.setFont(font);
+    text.setString("Time: " + std::to_string(time));
+    text.setCharacterSize(70);
+    text.setFillColor(arena->getFontColor());
+    text.setPosition(10, 10);
     // draw the text
     window->draw(text);
 }
@@ -148,7 +165,7 @@ void displayGameOver(sf::RenderWindow *window){
     window->draw(text);
 }
 
-void displayWin(sf::RenderWindow *window){
+void displayWin(sf::RenderWindow *window, int player){
     // create a text
     sf::Font font;
     if(!font.loadFromFile(FONT_PATH)){
@@ -157,10 +174,27 @@ void displayWin(sf::RenderWindow *window){
     }
     sf::Text text;
     text.setFont(font);
-    text.setString("You Win");
+    text.setString("Player " + std::to_string(player) + " wins!");
     text.setCharacterSize(100);
     text.setFillColor(sf::Color::Green);
-    text.setPosition(sf::VideoMode::getDesktopMode().width/2-280, sf::VideoMode::getDesktopMode().height/2-50);
+    text.setPosition(sf::VideoMode::getDesktopMode().width/2-400, sf::VideoMode::getDesktopMode().height/2-50);
+    // draw the text
+    window->draw(text);
+}
+
+void displayDraw(sf::RenderWindow *window){
+    // create a text
+    sf::Font font;
+    if(!font.loadFromFile(FONT_PATH)){
+        std::cerr << "Error loading font" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+    sf::Text text;
+    text.setFont(font);
+    text.setString("Draw!");
+    text.setCharacterSize(100);
+    text.setFillColor(sf::Color::Yellow);
+    text.setPosition(sf::VideoMode::getDesktopMode().width/2-250, sf::VideoMode::getDesktopMode().height/2-50);
     // draw the text
     window->draw(text);
 }

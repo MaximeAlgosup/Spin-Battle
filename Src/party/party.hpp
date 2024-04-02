@@ -11,7 +11,7 @@ class Party{
         Player *player2;
         Arena *arena;
         sf::RenderWindow *window;
-        
+        int time;
     public:
         
         /*
@@ -25,6 +25,19 @@ class Party{
                 Party object
         */
         Party(Player *player1, Player *player2, Arena *arena, sf::RenderWindow *window);
+
+        /*
+            Constructor
+            params:
+                player1: the player object
+                player2: the player object
+                arena: the arena object
+                window: the window object
+                time: the time of the party
+            return:
+                Party object
+        */
+        Party(Player *player1, Player *player2, Arena *arena, sf::RenderWindow *window, int time);
 
 
         /*
@@ -57,18 +70,19 @@ class Party{
         /*
             Display player win
             params:
-                void
+                player: the player number
             return:
                 void
         */
-        void win();
+        void win(int player);
 
         /*
-            Display player lose
+            Display players equality
             params:
                 void
             return:
                 void
         */
-        void lose();
+        void equality();
+
 };

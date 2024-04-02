@@ -13,8 +13,16 @@ int Player::getLevel(){
     return this->level;
 }
 
+void Player::setDead(bool dead){
+    this->isDead = dead;
+}
+
 void Player::scoreUp(int points){
     this->score += points;
+}
+
+void Player::resetScore(){
+    this->score = 0;
 }
 
 void Player::levelUp(){
