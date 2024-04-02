@@ -15,7 +15,7 @@ int main()
     bool printText = true;
     bool menu = true;
     sf::Music music;
-    if (!music.openFromFile("../Src/musics/beybladeopenning.ogg"))
+    if (!music.openFromFile("../Src/assets/musics/beybladeopenning.ogg"))
         exit(EXIT_FAILURE);
     else{
         music.setLoop(true);
@@ -47,7 +47,7 @@ int main()
         sf::sleep(sf::seconds(1));
     }
     music.stop();
-    if (!music.openFromFile("../Src/musics/battle.ogg"))
+    if (!music.openFromFile("../Src/assets/musics/battle.ogg"))
         exit(EXIT_FAILURE);
     else{
         music.setLoop(true);

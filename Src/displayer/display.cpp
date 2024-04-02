@@ -1,7 +1,7 @@
 #include <iostream>
 #include "display.hpp"
 
-#define FONT_PATH "../Src/fonts/LoveDays-2v7Oe.ttf"
+#define FONT_PATH "../Src/assets/fonts/LoveDays-2v7Oe.ttf"
 
 
 void displayMenu(sf::RenderWindow &window){
@@ -9,7 +9,7 @@ void displayMenu(sf::RenderWindow &window){
     sf::Texture BackgroundTexture;
     sf::Sprite background;
     
-    if(!BackgroundTexture.loadFromFile("../Src/pictures/beybladeswllpp.jpg")){
+    if(!BackgroundTexture.loadFromFile("../Src/assets/pictures/beybladeswllpp.jpg")){
       exit(EXIT_FAILURE);
     }
     else
@@ -47,7 +47,7 @@ void displayBackground(sf::RenderWindow &window){
     sf::Texture BackgroundTexture;
     sf::Sprite background;
     
-    if(!BackgroundTexture.loadFromFile("../Src/pictures/space.png")){
+    if(!BackgroundTexture.loadFromFile("../Src/assets/pictures/space.png")){
       exit(EXIT_FAILURE);
     }
     else
@@ -61,7 +61,7 @@ void displayArena(sf::RenderWindow &window, Arena &arena){
     // create a circle
     sf::CircleShape circle(arena.getRadius());
     sf::Texture texture;
-    if (!texture.loadFromFile("../Src/pictures/alan.jpg")){
+    if (!texture.loadFromFile("../Src/assets/pictures/alan.jpg")){
         exit(EXIT_FAILURE);
 
     }
