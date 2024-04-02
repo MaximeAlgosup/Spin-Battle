@@ -1,17 +1,73 @@
 #include <iostream>
 #include "display.hpp"
 
-#define FONT_PATH "../Src/fonts/FFF_Tusj.ttf"
+#define FONT_PATH "../Src/fonts/LoveDays-2v7Oe.ttf"
+
+
+void displayMenu(sf::RenderWindow &window){
+    // Set background color
+    sf::Texture BackgroundTexture;
+    sf::Sprite background;
+    
+    if(!BackgroundTexture.loadFromFile("../Src/pictures/beybladeswllpp.jpg")){
+      exit(EXIT_FAILURE);
+    }
+    else
+    {
+      background.setTexture(BackgroundTexture);
+    }
+    
+    // create a text
+    sf::Font font;
+    if(!font.loadFromFile(FONT_PATH)){
+        std::cerr << "Error loading font" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+    window.draw(background);
+}
+
+void displayMenuText(sf::RenderWindow &window){
+    // create a text
+    sf::Font font;
+    if(!font.loadFromFile(FONT_PATH)){
+        std::cerr << "Error loading font" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+    sf::Text text;
+    text.setFont(font);
+    text.setString("Press Enter to Start the 206 turbo");
+    text.setCharacterSize(70);
+    text.setFillColor(sf::Color::White);
+    text.setPosition(sf::VideoMode::getDesktopMode().width/2-550, 100);
+    window.draw(text);
+}
 
 void displayBackground(sf::RenderWindow &window){
-    // set background color
-    window.clear(sf::Color::Blue);
+    // set background image
+    sf::Texture BackgroundTexture;
+    sf::Sprite background;
+    
+    if(!BackgroundTexture.loadFromFile("../Src/pictures/space.png")){
+      exit(EXIT_FAILURE);
+    }
+    else
+    {
+      background.setTexture(BackgroundTexture);
+    }
+    window.draw(background);
 }
 
 void displayArena(sf::RenderWindow &window, Arena &arena){
     // create a circle
     sf::CircleShape circle(arena.getRadius());
-    circle.setFillColor(sf::Color::Black);
+    sf::Texture texture;
+    if (!texture.loadFromFile("../Src/pictures/alan.jpg")){
+        exit(EXIT_FAILURE);
+
+    }
+    else{
+        circle.setTexture(&texture);
+    }
     circle.setOutlineColor(sf::Color::Yellow);
     circle.setOutlineThickness(10);
     circle.setPosition(arena.getCenterX()-arena.getRadius()-10, arena.getCenterY()-arena.getRadius()-10);

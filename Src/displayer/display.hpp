@@ -4,6 +4,25 @@
 #include "player.hpp"
 #include "bot.hpp"
 
+
+/*
+    Display the menu of the game
+    params:
+        window: the window to display the menu
+    return:
+        void
+*/
+void displayMenu(sf::RenderWindow &window);
+
+/*
+    Display the menu text
+    params:
+        window: the window to display the menu text
+    return:
+        void
+*/
+void displayMenuText(sf::RenderWindow &window);
+
 /*
     Display the background of the game
     params:

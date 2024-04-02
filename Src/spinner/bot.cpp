@@ -27,9 +27,6 @@ Bot::Bot(int level, bool ig, unsigned int x, unsigned int y, int w, int s, int i
 
 bool Bot::isClose(Spinner spin){
     int distance = this->getDistance(spin);
-    std::cout << "Distance: " << distance << std::endl;
-    std::cout << "Vision: " << this->visionDistance << std::endl;
-    std::cout << "Radius: " << spin.getRadius() << std::endl << std::endl;
     if(distance < (this->visionDistance + spin.getRadius() + 5)){
         return true;
     }

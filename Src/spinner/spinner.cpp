@@ -168,10 +168,6 @@ void Spinner::reverseDirection(){
     if(this->inertia > otherSpin->inertia){
         this->inertia /= 2;
         otherSpin->inertia += (this->inertia/2);
-        std::cout << "Other Spin Inertia:" << otherSpin->inertia << std::endl;
-        std::cout << "Other Spin Max Inertia:" << otherSpin->maxInertia << std::endl;
-        std::cout << "This Spin Inertia:" << this->inertia << std::endl;
-        std::cout << "This Spin Max Inertia:" << this->maxInertia << std::endl;
         if(otherSpin->inertia > otherSpin->maxInertia){
             otherSpin->inertia = otherSpin->maxInertia;
         }
@@ -182,10 +178,6 @@ void Spinner::reverseDirection(){
     else if(this->inertia < otherSpin->inertia){
         otherSpin->inertia /= 2;
         this->inertia += (otherSpin->inertia/2);
-        std::cout << "This Spin Inertia:" << this->inertia << std::endl;
-        std::cout << "This Spin Max Inertia:" << this->maxInertia << std::endl;
-        std::cout << "Other Spin Inertia:" << otherSpin->inertia << std::endl;
-        std::cout << "Other Spin Max Inertia:" << otherSpin->maxInertia << std::endl;
         if(this->inertia > this->maxInertia){
             this->inertia = this->maxInertia;
         }
