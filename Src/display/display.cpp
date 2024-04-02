@@ -75,7 +75,7 @@ void displayArena(sf::RenderWindow *window, Arena *arena){
     window->draw(circle);
 }
 
-void displayScore(sf::RenderWindow *window, Arena *arena){
+void displayScore1(sf::RenderWindow *window, Arena *arena, Player *player){
     // create a text
     sf::Font font;
     if(!font.loadFromFile(arena->getFontPath())){
@@ -84,7 +84,7 @@ void displayScore(sf::RenderWindow *window, Arena *arena){
     }
     sf::Text text;
     text.setFont(font);
-    text.setString("Score: " + std::to_string(arena->getScore()));
+    text.setString("Score: " + std::to_string(player->getScore()));
     text.setCharacterSize(70);
     text.setFillColor(arena->getFontColor());
     text.setPosition(10, 10);
@@ -92,8 +92,7 @@ void displayScore(sf::RenderWindow *window, Arena *arena){
     window->draw(text);
 }
 
-
-void displayLevel(sf::RenderWindow *window, Arena *arena){
+void displayScore2(sf::RenderWindow *window, Arena *arena, Player *player){
     // create a text
     sf::Font font;
     if(!font.loadFromFile(arena->getFontPath())){
@@ -102,9 +101,9 @@ void displayLevel(sf::RenderWindow *window, Arena *arena){
     }
     sf::Text text;
     text.setFont(font);
-    text.setString("Level: " + std::to_string(arena->getLevel()));
+    text.setString("Score: " + std::to_string(player->getScore()));
     text.setCharacterSize(70);
-    text.setFillColor(sf::Color::White);
+    text.setFillColor(arena->getFontColor());
     text.setPosition(10, 110);
     // draw the text
     window->draw(text);

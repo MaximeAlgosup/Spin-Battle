@@ -20,7 +20,19 @@ void Party::run(){
 
         // spinner collision
         if(player1->isColliding(*player2)){
-            player1->contact(player2);
+            int result = player1->contact(player2);
+            switch(result){
+                case 1:
+                    player1->scoreUp(2);
+                    break;
+                case -1:
+                    player2->scoreUp(2);
+                    break;
+                default:
+                    player1->scoreUp(1);
+                    player2->scoreUp(1);
+                    break;
+            }
         }
 
         // visual update
@@ -96,8 +108,8 @@ void Party::update(){
     displayArena(window, arena);
     displayPlayer(window, player1);
     displayPlayer(window, player2);
-    displayScore(window, arena);
-    displayLevel(window, arena);
+    displayScore1(window, arena, player1);
+    displayScore2(window, arena, player2);
     // end the current frame
     window->display();  
 }

@@ -51,20 +51,22 @@ void displayArena(sf::RenderWindow *window, Arena *arena);
     params:
         window: the window to display the score
         arena: the arena to display the score
+        player: the player to display the score
     return:
         void
 */
-void displayScore(sf::RenderWindow *window, Arena *arena);
+void displayScore1(sf::RenderWindow *window, Arena *arena, Player *player);
 
 /*
-    Display the level of the player
+    Display the score of the player
     params:
-        window: the window to display the level
-        arena: the arena to display the level
+        window: the window to display the score
+        arena: the arena to display the score
+        player: the player to display the score
     return:
         void
 */
-void displayLevel(sf::RenderWindow *window, Arena *arena);
+void displayScore2(sf::RenderWindow *window, Arena *arena, Player *player);
 
 /*
     Display the player

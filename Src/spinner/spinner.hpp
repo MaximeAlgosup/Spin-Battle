@@ -170,9 +170,12 @@ class Spinner{
             params:
                 otherSpin: ennemy spinner
             return:
-                void
+                int: win status
+                0: no win
+                1: current spinner win
+                -1: other spinner win
         */
-        void contact(Spinner *otherSpin);
+        int contact(Spinner *otherSpin);
 
         /*
             Check if the spinner is colliding with another spinner

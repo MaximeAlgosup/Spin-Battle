@@ -164,7 +164,7 @@ void Spinner::reverseDirection(){
     }
 }
 
- void Spinner::contact(Spinner *otherSpin){
+ int Spinner::contact(Spinner *otherSpin){
     if(this->inertia > otherSpin->inertia){
         this->inertia /= 2;
         otherSpin->inertia += (this->inertia/2);
@@ -174,6 +174,7 @@ void Spinner::reverseDirection(){
         otherSpin->speed += (this->speed/2);
         otherSpin->direction = this->direction;
         this->reverseDirection();
+        return 1;
     }
     else if(this->inertia < otherSpin->inertia){
         otherSpin->inertia /= 2;
@@ -184,6 +185,7 @@ void Spinner::reverseDirection(){
         this->speed += (otherSpin->speed/2);
         this->direction = otherSpin->direction;
         otherSpin->reverseDirection();
+        return -1;
     }
     else{
         this->inertia *= 4;
@@ -192,6 +194,7 @@ void Spinner::reverseDirection(){
         otherSpin->speed *= 4;
         this->reverseDirection();
         otherSpin->reverseDirection();
+        return 0;
     }
  }
 
