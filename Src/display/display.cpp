@@ -42,12 +42,12 @@ void displayMenuText(sf::RenderWindow *window, Menu *menu){
     window->draw(text);
 }
 
-void displayBackground(sf::RenderWindow *window){
+void displayBackground(sf::RenderWindow *window, Arena *arena){
     // set background image
     sf::Texture BackgroundTexture;
     sf::Sprite background;
     
-    if(!BackgroundTexture.loadFromFile("../Src/assets/pictures/space.png")){
+    if(!BackgroundTexture.loadFromFile(arena->getBackgroundPath())){
       exit(EXIT_FAILURE);
     }
     else
@@ -61,7 +61,7 @@ void displayArena(sf::RenderWindow *window, Arena *arena){
     // create a circle
     sf::CircleShape circle(arena->getRadius());
     sf::Texture texture;
-    if (!texture.loadFromFile("../Src/assets/pictures/alan.jpg")){
+    if (!texture.loadFromFile(arena->getThemePath())){
         exit(EXIT_FAILURE);
 
     }
@@ -78,7 +78,7 @@ void displayArena(sf::RenderWindow *window, Arena *arena){
 void displayScore(sf::RenderWindow *window, Arena *arena){
     // create a text
     sf::Font font;
-    if(!font.loadFromFile(FONT_PATH)){
+    if(!font.loadFromFile(arena->getFontPath())){
         std::cerr << "Error loading font" << std::endl;
         exit(EXIT_FAILURE);
     }
@@ -86,7 +86,7 @@ void displayScore(sf::RenderWindow *window, Arena *arena){
     text.setFont(font);
     text.setString("Score: " + std::to_string(arena->getScore()));
     text.setCharacterSize(70);
-    text.setFillColor(sf::Color::White);
+    text.setFillColor(arena->getFontColor());
     text.setPosition(10, 10);
     // draw the text
     window->draw(text);
@@ -96,7 +96,7 @@ void displayScore(sf::RenderWindow *window, Arena *arena){
 void displayLevel(sf::RenderWindow *window, Arena *arena){
     // create a text
     sf::Font font;
-    if(!font.loadFromFile(FONT_PATH)){
+    if(!font.loadFromFile(arena->getFontPath())){
         std::cerr << "Error loading font" << std::endl;
         exit(EXIT_FAILURE);
     }

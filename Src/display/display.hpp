@@ -30,10 +30,11 @@ void displayMenuText(sf::RenderWindow *window, Menu *menu);
     Display the background of the game
     params:
         window: the window to display the background
+        arena: the arena to display the background
     return:
         void
 */
-void displayBackground(sf::RenderWindow *window);
+void displayBackground(sf::RenderWindow *window, Arena *arena);
 
 /*
     Display the arena

@@ -3,39 +3,30 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
-Party::Party(Player *player, Bot *bots, Arena *arena, sf::RenderWindow *window){
-    this->player = player;
-    for(int i = 0; i < 5; i++){
-        this->bots[i] = &bots[i];
-    }
+Party::Party(Player *player1, Player *player2, Arena *arena, sf::RenderWindow *window){
+    this->player1 = player1;
+    this->player2 = player2;
     this->arena = arena;
     this->window = window;
 }
 
 void Party::run(){
+    this->arena->playMusic();
     while(window->isOpen()){
         // Events
         keybordEvent();
         // Actions
         this->arena->setSize();
 
+        // spinner collision
+        if(player1->isColliding(*player2)){
+            player1->contact(player2);
+        }
+
         // visual update
         update();
-
-        // Check if player win or lose
-        bool isWin = true;
-        for(int i = 0; i < 5; i++){
-            if(bots[i]->getIsDead() == false){
-                isWin = false;
-            }
-        }
-        if(isWin){
-            win();
-        }
-        if(player->getIsDead()){
-            lose();
-        }
     }
+    this->arena->stopMusic();
 }
 
 void Party::keybordEvent(){
@@ -48,48 +39,67 @@ void Party::keybordEvent(){
             exit(EXIT_SUCCESS);
         }
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
+    // move player 1
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
         // Check if the spinner is out of the screen
-        if((player->getPosX() - player->getRadius()) > 10){
-            player->moveLeft();
+        if((player1->getPosX() - player1->getRadius()) > 10){
+            player1->moveLeft();
         }
     }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
-        if((player->getPosX() + player->getRadius()) < sf::VideoMode::getDesktopMode().width){
-            player->moveRight();
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
+        if((player1->getPosX() + player1->getRadius()) < sf::VideoMode::getDesktopMode().width){
+            player1->moveRight();
         }
     }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W)){
-        if((player->getPosY() - player->getRadius()) > 10){
-            player->moveUp();
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)){
+        if((player1->getPosY() - player1->getRadius()) > 10){
+            player1->moveUp();
         }
     }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
-        if((player->getPosY() + player->getRadius()) < sf::VideoMode::getDesktopMode().height){
-            player->moveDown();
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)){
+        if((player1->getPosY() + player1->getRadius()) < sf::VideoMode::getDesktopMode().height){
+            player1->moveDown();
+        }
+    }
+    // move player 2
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
+        // Check if the spinner is out of the screen
+        if((player2->getPosX() - player2->getRadius()) > 10){
+            player2->moveLeft();
+        }
+    }
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
+        if((player2->getPosX() + player2->getRadius()) < sf::VideoMode::getDesktopMode().width){
+            player2->moveRight();
+        }
+    }
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)){
+        if((player2->getPosY() - player2->getRadius()) > 10){
+            player2->moveUp();
+        }
+    }
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
+        if((player2->getPosY() + player2->getRadius()) < sf::VideoMode::getDesktopMode().height){
+            player2->moveDown();
         }
     }
     else{
-        player->autoMove();
+        player1->autoMove();
+        player2->autoMove();
     }
 }
 
 
 void Party::update(){
     // Draws
-        displayBackground(window);
-        displayArena(window, arena);
-        for(int i = 0; i < 5; i++){
-            if(!bots[i]->getIsDead()){
-                displayBot(window, bots[i]);
-            }
-        }
-        displayPlayer(window, player);
-        displayScore(window, arena);
-        displayLevel(window, arena);
-
-        // end the current frame
-        window->display();  
+    displayBackground(window, arena);
+    displayArena(window, arena);
+    displayPlayer(window, player1);
+    displayPlayer(window, player2);
+    displayScore(window, arena);
+    displayLevel(window, arena);
+    // end the current frame
+    window->display();  
 }
 
 void Party::win(){

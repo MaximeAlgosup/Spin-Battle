@@ -2,14 +2,13 @@
 
 #include <SFML/Graphics.hpp>
 #include "player.hpp"
-#include "bot.hpp"
 #include "arena.hpp"
 
 
 class Party{
     private:
-        Player *player;
-        Bot *bots[5];
+        Player *player1;
+        Player *player2;
         Arena *arena;
         sf::RenderWindow *window;
         
@@ -18,14 +17,14 @@ class Party{
         /*
             Constructor
             params:
-                player: the player object
-                bots: the bots array
+                player1: the player object
+                player2: the player object
                 arena: the arena object
                 window: the window object
             return:
                 Party object
         */
-        Party(Player *player, Bot *bots, Arena *arena, sf::RenderWindow *indow);
+        Party(Player *player1, Player *player2, Arena *arena, sf::RenderWindow *window);
 
 
         /*

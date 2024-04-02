@@ -2,7 +2,7 @@
 #include <iostream>
 #include <fstream>
 
-Arena::    Arena(int x, int y, int r, int l, int s, char* backgroundPath, char* fontPath, sf::Color fontColor, char* soundPath) {
+Arena::Arena(int x, int y, int r, int l, int s, char* backgroundPath, char *themePath, char* fontPath, sf::Color fontColor, char* soundPath){
     this->center_x = x;
     this->center_y = y;
     this->radius = r;
@@ -14,6 +14,12 @@ Arena::    Arena(int x, int y, int r, int l, int s, char* backgroundPath, char* 
         exit(EXIT_FAILURE);
     }
     this->backgroundPath = backgroundPath;
+    // Check if the theme exists
+    if(!std::ifstream(themePath)){
+        std::cerr << "Error loading theme" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+    this->themePath = themePath;
     // Check if the font exists
     if(!std::ifstream(fontPath)){
         std::cerr << "Error loading font" << std::endl;
@@ -22,7 +28,7 @@ Arena::    Arena(int x, int y, int r, int l, int s, char* backgroundPath, char* 
     this->fontPath = fontPath;
     this->fontColor = fontColor;
     this->soundPath = soundPath;
-    if (!music.openFromFile("../Src/assets/musics/beybladeopenning.ogg"))
+    if (!music.openFromFile(soundPath))
         exit(EXIT_FAILURE);
     else{
         music.setLoop(true);
@@ -53,6 +59,10 @@ int Arena::getScore(){
 
 char* Arena::getBackgroundPath(){
     return this->backgroundPath;
+}
+
+char* Arena::getThemePath(){
+    return this->themePath;
 }
 
 char* Arena::getFontPath(){
@@ -96,6 +106,15 @@ void Arena::setBackgroundPath(char* backgroundPath){
         exit(EXIT_FAILURE);
     }
     this->backgroundPath = backgroundPath;
+}
+
+void Arena::setThemePath(char* themePath){
+    // Check if the theme exists
+    if(!std::ifstream(themePath)){
+        std::cerr << "Error loading theme" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+    this->themePath = themePath;
 }
 
 void Arena::setFontPath(char* fontPath){

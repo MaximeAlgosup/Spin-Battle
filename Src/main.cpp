@@ -1,6 +1,5 @@
 #include <iostream>
 #include "player.hpp"
-#include "bot.hpp"
 #include "arena.hpp"
 #include "party.hpp"
 #include "menu.hpp"
@@ -8,12 +7,13 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 
-#define ARENA_RADIUS 300
+#define ARENA_RADIUS 400
 #define TITLE "Spin-Battle"
 char menuTitle[] = "Press Enter to Start the 206 turbo";
 char menuBackgroundPath[] = "../Src/assets/pictures/beybladeswllpp.jpg";
 char menuMusicPath[] = "../Src/assets/musics/beybladeopenning.ogg";
 char arenaBackgroundPath[] = "../Src/assets/pictures/space.png";
+char arenaThemePath[] = "../Src/assets/pictures/alan.jpg";
 char arenaMusicPath[] = "../Src/assets/musics/battle.ogg";
 char fontPath[] = "../Src/assets/fonts/LoveDays-2v7Oe.ttf";
 
@@ -28,22 +28,14 @@ int main()
     menu.run(&window);
 
     // init arena
-    Arena arena((sf::VideoMode::getDesktopMode().width/2), (sf::VideoMode::getDesktopMode().height/2), ARENA_RADIUS, 1, 0, arenaBackgroundPath, fontPath, sf::Color::White, arenaMusicPath);
+    Arena arena((sf::VideoMode::getDesktopMode().width/2), (sf::VideoMode::getDesktopMode().height/2), ARENA_RADIUS, 1, 0, arenaBackgroundPath, arenaThemePath, fontPath, sf::Color::White, arenaMusicPath);
 
-    // init player
-    Player player(arena.getCenterX(), arena.getCenterY(), 15, 15, 10000, 5);
-
-    // init bots
-    Bot bots[] = {
-        Bot(4, true, arena.getCenterX()-120, arena.getCenterY(), 10, 5, 20000, 5),
-        Bot(4, true, arena.getCenterX(), arena.getCenterY()-120, 10, 5, 20000, 5),
-        Bot(4, true, arena.getCenterX()+120, arena.getCenterY(), 10, 5, 20000, 5),
-        Bot(4, true, arena.getCenterX(), arena.getCenterY()+120, 10, 5, 20000, 5),
-        Bot(4, true, arena.getCenterX()+120, arena.getCenterY()-180, 10, 5, 20000, 5)
-    };
+    // init players
+    Player player1(arena.getCenterX()-70, arena.getCenterY(), 15, 15, 10000, 5);
+    Player player2(arena.getCenterX()+70, arena.getCenterY(), 15, 15, 10000, 5);
 
     // init party
-    Party party(&player, bots, &arena, &window);
+    Party party(&player1, &player2, &arena, &window);
     party.run();
     
     exit(EXIT_SUCCESS);

@@ -10,6 +10,7 @@ class Arena {
         int level;
         int score;
         char* backgroundPath;
+        char* themePath;
         char* fontPath;
         sf::Color fontColor;
         char* soundPath;
@@ -25,13 +26,14 @@ class Arena {
         l: level of the arena
         s: score of the arena
         backgroundPath: path to the background image
+        themePath: path to the theme
         fontPath: path to the font
         fontColor: color of the font
         soundPath: path to the sound
     return:
         Arena object
     */
-    Arena(int x, int y, int r, int l, int s, char* backgroundPath, char* fontPath, sf::Color fontColor, char* soundPath);
+    Arena(int x, int y, int r, int l, int s, char* backgroundPath, char* themePath, char* fontPath, sf::Color fontColor, char* soundPath);
 
     /*
     Get the position of the center of the arena in x coordinate
@@ -89,6 +91,15 @@ class Arena {
     char* getBackgroundPath();
 
     /*
+    Get the path to the theme
+    params:
+        void
+    return:
+        char*: path to the theme
+    */
+    char* getThemePath();
+
+    /*
     Get the path to the font
     params:
         void
@@ -134,6 +145,15 @@ class Arena {
             void
     */
     void setBackgroundPath(char* backgroundPath);
+
+    /*
+        Set the path to the theme
+        params:
+            themePath: path to the theme
+        return:
+            void
+    */
+    void setThemePath(char* themePath);
 
     /*
         Set the path to the font
