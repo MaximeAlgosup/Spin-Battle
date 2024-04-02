@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "arena.hpp"
+#include "menu.hpp"
 #include "player.hpp"
 #include "bot.hpp"
 
@@ -9,19 +10,21 @@
     Display the menu of the game
     params:
         window: the window to display the menu
+        menu: the menu to display
     return:
         void
 */
-void displayMenu(sf::RenderWindow &window);
+void displayMenu(sf::RenderWindow *window, Menu *menu);
 
 /*
     Display the menu text
     params:
         window: the window to display the menu text
+        menu: the menu to display the menu text
     return:
         void
 */
-void displayMenuText(sf::RenderWindow &window);
+void displayMenuText(sf::RenderWindow *window, Menu *menu);
 
 /*
     Display the background of the game
@@ -30,7 +33,7 @@ void displayMenuText(sf::RenderWindow &window);
     return:
         void
 */
-void displayBackground(sf::RenderWindow &window);
+void displayBackground(sf::RenderWindow *window);
 
 /*
     Display the arena
@@ -40,7 +43,7 @@ void displayBackground(sf::RenderWindow &window);
     return:
         void
 */
-void displayArena(sf::RenderWindow &window, Arena &arena);
+void displayArena(sf::RenderWindow *window, Arena *arena);
 
 /*
     Display the score of the player
@@ -50,7 +53,7 @@ void displayArena(sf::RenderWindow &window, Arena &arena);
     return:
         void
 */
-void displayScore(sf::RenderWindow &window, Arena &arena);
+void displayScore(sf::RenderWindow *window, Arena *arena);
 
 /*
     Display the level of the player
@@ -60,7 +63,7 @@ void displayScore(sf::RenderWindow &window, Arena &arena);
     return:
         void
 */
-void displayLevel(sf::RenderWindow &window, Arena &arena);
+void displayLevel(sf::RenderWindow *window, Arena *arena);
 
 /*
     Display the player
@@ -70,7 +73,7 @@ void displayLevel(sf::RenderWindow &window, Arena &arena);
     return:
         void
 */
-void displayPlayer(sf::RenderWindow &window, Player &player);
+void displayPlayer(sf::RenderWindow *window, Player *player);
 
 /*
     Display the bot
@@ -80,7 +83,7 @@ void displayPlayer(sf::RenderWindow &window, Player &player);
     return:
         void
 */
-void displayBot(sf::RenderWindow &window, Bot &bot);
+void displayBot(sf::RenderWindow *window, Bot *bot);
 
 /*
     Display the game over screen
@@ -89,4 +92,13 @@ void displayBot(sf::RenderWindow &window, Bot &bot);
     return:
         void
 */
-void displayGameOver(sf::RenderWindow &window);
+void displayGameOver(sf::RenderWindow *window);
+
+/*
+    Display the win screen
+    params:
+        window: the window to display the win screen
+    return:
+        void
+*/
+void displayWin(sf::RenderWindow *window);

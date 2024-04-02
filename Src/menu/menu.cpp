@@ -1,7 +1,9 @@
 #include "menu.hpp"
+#include "display.hpp"
+#include <fstream>
 #include <iostream>
 
-Menu::Menu(char* title, char* backgroundPath, char* fontPath, char* fontColor, char* soundPath){
+Menu::Menu(char* title, char* backgroundPath, char* fontPath, sf::Color fontColor, char* soundPath){
     this->title = title;
     // Check if the background image exists
     if(!std::ifstream(backgroundPath)){
@@ -22,6 +24,37 @@ Menu::Menu(char* title, char* backgroundPath, char* fontPath, char* fontColor, c
     else{
         music.setLoop(true);
     }
+}
+
+void Menu::run(sf::RenderWindow *window){
+    music.play();
+    // Display the menu
+    // init objects
+    bool printText = true;
+    bool menu = true;
+    this->playMusic();
+    while (menu){
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
+            window->close();
+            exit(EXIT_SUCCESS);
+        }
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)){
+            menu = false;
+        }
+        displayMenu(window, this);
+        if(printText){
+            displayMenuText(window, this);
+            printText = false;
+        }
+        else{
+            printText = true;
+        }
+        
+        window->display();
+        sf::sleep(sf::seconds(1));
+    }
+    // Stop music
+    this->stopMusic();
 }
 
 void Menu::setTitle(char* title){
@@ -46,7 +79,7 @@ void Menu::setFontPath(char* fontPath){
     this->fontPath = fontPath;
 }
 
-void Menu::setFontColor(char* fontColor){
+void Menu::setFontColor(sf::Color fontColor){
     this->fontColor = fontColor;
 }
 
@@ -71,7 +104,7 @@ char* Menu::getFontPath(){
     return this->fontPath;
 }
 
-char* Menu::getFontColor(){
+sf::Color Menu::getFontColor(){
     return this->fontColor;
 }
 

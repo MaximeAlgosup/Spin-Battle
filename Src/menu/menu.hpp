@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Audio.hpp>
+#include <SFML/Graphics.hpp>
 
 class Menu{
 
@@ -8,7 +9,7 @@ class Menu{
         char* title;
         char* backgroundPath;
         char* fontPath;
-        char* fontColor;
+        sf::Color fontColor;
         char* soundPath;
         sf::Music music;
 
@@ -25,8 +26,17 @@ class Menu{
             return:
                 Menu object
         */
-        Menu(char* title, char* backgroundPath, char* fontPath, char* fontColor, char* soundPath);
+        Menu(char* title, char* backgroundPath, char* fontPath, sf::Color fontColor, char* soundPath);
 
+        /*
+            Run the menu
+            params:
+                window: the window to display the menu
+            return:
+                void
+        */
+        void run(sf::RenderWindow *window);
+        
         // Getters and Setters
 
         /*
@@ -63,7 +73,7 @@ class Menu{
             return:
                 void
         */
-        void setFontColor(char* fontColor);
+        void setFontColor(sf::Color fontColor);
 
         /*
             Set the sound path of the menu
@@ -106,9 +116,9 @@ class Menu{
             params:
                 void
             return:
-                char*: the color of the font
+                sf::Color: the color of the font
         */
-        char* getFontColor();
+        sf::Color getFontColor();
 
         /*
             Get the sound path of the menu
@@ -126,7 +136,7 @@ class Menu{
             return:
                 void
         */
-        void playSound();
+        void playMusic();
 
         /*
             Stop the sound of the menu
@@ -135,6 +145,5 @@ class Menu{
             return:
                 void
         */
-        void stopSound();
-
+        void stopMusic();
 };
