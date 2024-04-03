@@ -19,7 +19,7 @@ Menu::Menu(char* title, char* backgroundPath, char* fontPath, sf::Color fontColo
     this->fontPath = fontPath;
     this->fontColor = fontColor;
     this->soundPath = soundPath;
-    if (!music.openFromFile("../Src/assets/musics/beybladeopenning.ogg"))
+    if (!music.openFromFile(soundPath))
         exit(EXIT_FAILURE);
     else{
         music.setLoop(true);

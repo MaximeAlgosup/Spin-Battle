@@ -23,6 +23,7 @@ add_executable(Spin-Battle
     Src/spinner/bot.cpp
     Src/display/display.cpp
     Src/menu/menu.cpp
+    Src/menu/selectMenu.cpp
     Src/party/party.cpp
 )
 

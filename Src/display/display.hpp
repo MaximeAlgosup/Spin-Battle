@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "arena.hpp"
 #include "menu.hpp"
+#include "selectMenu.hpp"
 #include "player.hpp"
 #include "bot.hpp"
 
@@ -25,6 +26,32 @@ void displayMenu(sf::RenderWindow *window, Menu *menu);
         void
 */
 void displayMenuText(sf::RenderWindow *window, Menu *menu);
+
+/*
+    Display the select option of the game
+    params:
+        window: the window to display the select option
+        text: the text to display
+        x: the x position of the text
+        y: the y position of the text
+        menu: the menu to display the select option
+    return:
+        void
+*/
+void displaySelectOption(sf::RenderWindow *window, char* text, int x, int y, Menu *menu);
+
+/*
+    Display the menu cursor
+    params:
+        window: the window to display the menu cursor
+        menu: the menu to display the menu cursor
+        x: the x position of the cursor
+        y: the y position of the cursor
+        cursorSpritePath: the path of the cursor sprite
+    return:
+        void
+*/
+void displayMenuCursor(sf::RenderWindow *window, SelectMenu *menu, int x, int y, char* cursorSpritePath);
 
 /*
     Display the background of the game

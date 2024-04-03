@@ -50,11 +50,13 @@ void Party::run(){
         if(player1->isOut(arena->getCenterX(), arena->getCenterY(), arena->getRadius())){
             player1->setDead(true);
             player1->resetScore();
+            if(player2->getScore() == 0) player2->scoreUp(1);
             time = 0;
         }
         else if(player2->isOut(arena->getCenterX(), arena->getCenterY(), arena->getRadius())){
             player2->setDead(true);
             player2->resetScore();
+            if(player1->getScore() == 0) player1->scoreUp(1);
             time = 0;
         }
         else{

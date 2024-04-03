@@ -16,13 +16,6 @@ void displayMenu(sf::RenderWindow *window, Menu *menu){
     {
       background.setTexture(BackgroundTexture);
     }
-    
-    // create a text
-    sf::Font font;
-    if(!font.loadFromFile(FONT_PATH)){
-        std::cerr << "Error loading font" << std::endl;
-        exit(EXIT_FAILURE);
-    }
     window->draw(background);
 }
 
@@ -38,8 +31,49 @@ void displayMenuText(sf::RenderWindow *window, Menu *menu){
     text.setString(menu->getTitle());
     text.setCharacterSize(70);
     text.setFillColor(menu->getFontColor());
-    text.setPosition(sf::VideoMode::getDesktopMode().width/2-550, 100);
+    text.setPosition(sf::VideoMode::getDesktopMode().width/2-300, 100);
     window->draw(text);
+}
+
+void displaySelectOption(sf::RenderWindow *window, char* text, int x, int y, Menu *menu){
+    // create rectangle
+    sf::RectangleShape rectangle(sf::Vector2f(400, 100));
+    rectangle.setFillColor(menu->getFontColor());
+    rectangle.setOutlineColor(sf::Color::White);
+    rectangle.setOutlineThickness(5);
+    rectangle.setPosition(x, y);
+    window->draw(rectangle);
+    // create a text
+    sf::Font font;
+    if(!font.loadFromFile(menu->getFontPath())){
+        std::cerr << "Error loading font" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+    sf::Text option;
+    option.setFont(font);
+    option.setString(text);
+    option.setCharacterSize(70);
+    option.setFillColor(sf::Color::White);
+    option.setPosition(x+10, y+10);
+    window->draw(option);
+}
+
+void displayMenuCursor(sf::RenderWindow *window, SelectMenu *menu, int x, int y, char* cursorSpritePath){
+    // create a circle
+    sf::CircleShape circle(50);
+    sf::Texture texture;
+    if (!texture.loadFromFile(cursorSpritePath)){
+        exit(EXIT_FAILURE);
+    }
+    else{
+        circle.setTexture(&texture);
+    }
+    circle.rotate(menu->getCursorRotation()-167.f);
+    circle.setOrigin(50, 50);
+    circle.setPosition(x+350, y+50);
+    // draw the circle
+    window->draw(circle);
+    menu->setCursorRotation(menu->getCursorRotation()+30.f);
 }
 
 void displayBackground(sf::RenderWindow *window, Arena *arena){
@@ -84,7 +118,7 @@ void displayScore1(sf::RenderWindow *window, Arena *arena, Player *player){
     }
     sf::Text text;
     text.setFont(font);
-    text.setString("Score: " + std::to_string(player->getScore()));
+    text.setString("Red player: " + std::to_string(player->getScore()));
     text.setCharacterSize(70);
     text.setFillColor(arena->getFontColor());
     text.setPosition(10, 110);
@@ -101,7 +135,7 @@ void displayScore2(sf::RenderWindow *window, Arena *arena, Player *player){
     }
     sf::Text text;
     text.setFont(font);
-    text.setString("Score: " + std::to_string(player->getScore()));
+    text.setString("Blue player: " + std::to_string(player->getScore()));
     text.setCharacterSize(70);
     text.setFillColor(arena->getFontColor());
     text.setPosition(10, 210);
@@ -185,7 +219,12 @@ void displayWin(sf::RenderWindow *window, int player){
     }
     sf::Text text;
     text.setFont(font);
-    text.setString("Player " + std::to_string(player) + " wins!");
+    if(player == 1){
+        text.setString("Red player wins!");
+    }
+    else{
+        text.setString("Blue player wins!");
+    }
     text.setCharacterSize(100);
     text.setFillColor(sf::Color::Green);
     text.setPosition(sf::VideoMode::getDesktopMode().width/2-400, sf::VideoMode::getDesktopMode().height/2-50);
