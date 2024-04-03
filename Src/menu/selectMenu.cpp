@@ -17,7 +17,7 @@ SelectMenu::SelectMenu(char* title, char* backgroundPath, char* fontPath, sf::Co
     this->setting = new Setting(fontColor, fontPath, backgroundPath, cursorSpritePath);
 }
 
-void SelectMenu::run(sf::RenderWindow *window){
+void SelectMenu::run(sf::RenderWindow *window, Arena *arena){
     // Play music
     this->playMusic();
     bool menu = true;
@@ -42,6 +42,8 @@ void SelectMenu::run(sf::RenderWindow *window){
                 case SelectMenuType::SETTINGS:
                     // Display the settings
                     this->setting->run(window);
+                    arena->setThemeID(this->setting->getThemeID());
+                    arena->setStadiumID(this->setting->getStadiumID());
                     break;
                 case SelectMenuType::CREDITS:
                     // Display the credits

@@ -10,7 +10,9 @@ class Arena {
         int level;
         int score;
         char* themePath;
+        int themeID;
         char* stadiumPath;
+        int stadiumID;
         char* fontPath;
         sf::Color fontColor;
         char* soundPath;
@@ -91,6 +93,15 @@ class Arena {
     char* getThemePath();
 
     /*
+    Get the ID of the theme
+    params:
+        void
+    return:
+        int: ID of the theme
+    */
+    int getThemeID();
+
+    /*
     Get the path to the theme
     params:
         void
@@ -98,6 +109,15 @@ class Arena {
         char*: path to the theme
     */
     char* getStadiumPath();
+
+    /*
+    Get the ID of the stadium
+    params:
+        void
+    return:
+        int: ID of the stadium
+    */
+   int getStadiumID();
 
     /*
     Get the path to the font
@@ -147,6 +167,15 @@ class Arena {
     void setThemePath(char* ThemePath);
 
     /*
+        Set the ID of the theme
+        params:
+            themeID: ID of the theme
+        return:
+            void
+    */
+    void setThemeID(int themeID);
+
+    /*
         Set the path to the theme
         params:
             themePath: path to the theme
@@ -154,6 +183,15 @@ class Arena {
             void
     */
     void setStadiumPath(char* themePath);
+
+    /*
+        Set the ID of the stadium
+        params:
+            stadiumID: ID of the stadium
+        return:
+            void
+    */
+    void setStadiumID(int stadiumID);
 
     /*
         Set the path to the font

@@ -14,12 +14,14 @@ Arena::Arena(int x, int y, int r, int l, int s, char* themePath, char *stadiumPa
         exit(EXIT_FAILURE);
     }
     this->themePath = themePath;
+    this->themeID = 1;
     // Check if the theme exists
     if(!std::ifstream(stadiumPath)){
         std::cerr << "Error loading stadium image" << std::endl;
         exit(EXIT_FAILURE);
     }
     this->stadiumPath = stadiumPath;
+    this->stadiumID = 1;
     // Check if the font exists
     if(!std::ifstream(fontPath)){
         std::cerr << "Error loading font" << std::endl;
@@ -61,8 +63,16 @@ char* Arena::getThemePath(){
     return this->themePath;
 }
 
+int Arena::getThemeID(){
+    return this->themeID;
+}
+
 char* Arena::getStadiumPath(){
     return this->stadiumPath;
+}
+
+int Arena::getStadiumID(){
+    return this->stadiumID;
 }
 
 char* Arena::getFontPath(){
@@ -108,6 +118,25 @@ void Arena::setThemePath(char* themePath){
     this->themePath = themePath;
 }
 
+void Arena::setThemeID(int themeID){
+    this->themeID = themeID;
+    // search and set the theme path
+    switch(themeID){
+        case 1:
+            this->setThemePath("../Src/assets/pictures/theme1.png");
+            break;
+        case 2:
+            this->setThemePath("../Src/assets/pictures/theme2.png");
+            break;
+        case 3:
+            this->setThemePath("../Src/assets/pictures/theme3.png");
+            break;
+        default:
+            this->setThemePath("../Src/assets/pictures/theme1.png");
+            break;
+    }
+}
+
 void Arena::setStadiumPath(char* stadiumPath){
     // Check if the theme exists
     if(!std::ifstream(stadiumPath)){
@@ -115,6 +144,25 @@ void Arena::setStadiumPath(char* stadiumPath){
         exit(EXIT_FAILURE);
     }
     this->stadiumPath = stadiumPath;
+}
+
+void Arena::setStadiumID(int stadiumID){
+    this->stadiumID = stadiumID;
+    // search and set the stadium path
+    switch(stadiumID){
+        case 1:
+            this->setStadiumPath("../Src/assets/pictures/stadium1.png");
+            break;
+        case 2:
+            this->setStadiumPath("../Src/assets/pictures/stadium2.png");
+            break;
+        case 3:
+            this->setStadiumPath("../Src/assets/pictures/stadium3.png");
+            break;
+        default:
+            this->setStadiumPath("../Src/assets/pictures/stadium1.png");
+            break;
+    }
 }
 
 void Arena::setFontPath(char* fontPath){

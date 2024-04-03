@@ -3,6 +3,7 @@
 #include "menu.hpp"
 #include "credit.hpp"
 #include "setting.hpp"
+#include "arena.hpp"
 
 enum class SelectMenuType{
     PLAY,
@@ -39,10 +40,11 @@ class SelectMenu : public Menu{
             Run the menu
             params:
                 window: the window to display the menu
+                arena: the arena to display the menu
             return:
                 void
         */
-        void run(sf::RenderWindow *window);
+        void run(sf::RenderWindow *window, Arena *arena);
 
         /*
             Set the type of the menu

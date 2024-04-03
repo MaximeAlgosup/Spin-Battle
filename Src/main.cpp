@@ -56,7 +56,7 @@ int main()
 
         // init select menu
         SelectMenu selectMenu(selectMenuTitle, selectMenuBackgroundPath, fontPath, sf::Color{39, 1, 0, 255}, selectMenuMusicPath, player1SpritePath);
-        selectMenu.run(&window);
+        selectMenu.run(&window, &arena);
 
         // init party
         Party party(&player1, &player2, &arena, &window);
