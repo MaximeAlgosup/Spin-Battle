@@ -16,6 +16,8 @@ char arenaBackgroundPath[] = "../Src/assets/pictures/space.png";
 char arenaThemePath[] = "../Src/assets/pictures/alan.jpg";
 char arenaMusicPath[] = "../Src/assets/musics/battle.ogg";
 char fontPath[] = "../Src/assets/fonts/LoveDays-2v7Oe.ttf";
+char player1SpritePath[] = "../Src/assets/pictures/ldrago.png";
+char player2SpritePath[] = "../Src/assets/pictures/pegasus.png";
 
 int main()
 {
@@ -31,8 +33,8 @@ int main()
     Arena arena((sf::VideoMode::getDesktopMode().width/2), (sf::VideoMode::getDesktopMode().height/2), ARENA_RADIUS, 1, 0, arenaBackgroundPath, arenaThemePath, fontPath, sf::Color::White, arenaMusicPath);
 
     // init players
-    Player player1(arena.getCenterX()-70, arena.getCenterY(), 15, 15, 10000, 5);
-    Player player2(arena.getCenterX()+70, arena.getCenterY(), 15, 15, 10000, 5);
+    Player player1(arena.getCenterX()-70, arena.getCenterY(), 15, 15, 10000, 5, sf::Color::Red, player1SpritePath);
+    Player player2(arena.getCenterX()+70, arena.getCenterY(), 15, 15, 10000, 5, sf::Color::Blue, player2SpritePath);
 
     // init party
     Party party(&player1, &player2, &arena, &window);

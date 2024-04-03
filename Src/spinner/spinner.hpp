@@ -20,6 +20,7 @@ class Spinner{
         int maxInertia;
         int inertia;
         bool isDead;
+        float rotation;
 
     public:
         /*
@@ -109,6 +110,27 @@ class Spinner{
                 bool: status of the spinner
         */
         bool getIsDead();
+
+        /*
+            Get the rotation of the spinner
+            params:
+                void
+            return:
+                float: rotation of the spinner
+        */
+        float getRotation();
+
+
+        // Setters
+
+        /*
+            Set the rotation of the spinner
+            params:
+                rotation: rotation of the spinner
+            return:
+                void
+        */
+        void setRotation(float rotation);
 
         /*
             Move the spinner up

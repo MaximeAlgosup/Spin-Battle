@@ -15,6 +15,7 @@ Spinner::Spinner(unsigned int x, unsigned int y, int w, int s, int i, int a) {
     this->maxInertia = i;
     this->inertia = 0;
     this->isDead = false;
+    this->rotation = 0.f;
 }
 
 // Getters
@@ -51,7 +52,16 @@ bool Spinner::getIsDead(){
     return this->isDead;
 }
 
+float Spinner::getRotation(){
+    return this->rotation;
+}
+
 // Setters
+
+void Spinner::setRotation(float rotation){
+    this->rotation = rotation;
+}
+
 
 void Spinner::moveUp(){
     if(this->inertia > this->agility && this->direction != UP){

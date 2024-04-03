@@ -1,11 +1,14 @@
 #pragma once
 
 #include "spinner.hpp"
+#include <SFML/Graphics.hpp>
 
 class Player : public Spinner {
     private:
         int score;
         int level;
+        sf::Color ringColor;
+        char* spritePath;
 
     public:
 
@@ -18,10 +21,12 @@ class Player : public Spinner {
                 s: max speed of the spinner
                 i: max inertia of the spinner
                 a: agility of the spinner
+                rc: color of the ring
+                spritePath: path to the sprite
             return:
                 Player object
         */
-        Player(unsigned int x, unsigned int y, int w, int s, int i, int a);
+        Player(unsigned int x, unsigned int y, int w, int s, int i, int a, sf::Color rc, char* spritePath);
 
         // Getters
 
@@ -43,6 +48,24 @@ class Player : public Spinner {
         */
         int getLevel();
 
+        /*
+            Get the path to the sprite
+            params:
+                void
+            return:
+                char*: path to the sprite
+        */
+        char* getSpritePath();
+
+        /*
+            Get the color of the ring
+            params:
+                void
+            return:
+                sf::Color: color of the ring
+        */
+        sf::Color getRingColor();
+
         // Setters
 
         /*
@@ -53,6 +76,15 @@ class Player : public Spinner {
                 void
         */
         void setDead(bool dead);
+
+        /*
+            Set the path to the sprite
+            params:
+                spritePath: path to the sprite
+            return:
+                void
+        */
+        void setSpritePath(char* spritePath);
 
         /*
             Increase the score of the player

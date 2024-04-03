@@ -129,12 +129,23 @@ void displayTime(sf::RenderWindow *window, Arena *arena, int time){
 void displayPlayer(sf::RenderWindow *window, Player *player){
     // create a circle
     sf::CircleShape circle(player->getRadius());
-    circle.setFillColor(sf::Color::Red);
-    circle.setOutlineColor(sf::Color::Green);
+    sf::Texture texture;
+    if (!texture.loadFromFile(player->getSpritePath())){
+        exit(EXIT_FAILURE);
+
+    }
+    else{
+        circle.setTexture(&texture);
+    }
+    circle.setOutlineColor(player->getRingColor());
     circle.setOutlineThickness(5);
+    circle.setOrigin(player->getRadius(), player->getRadius());
     circle.setPosition(player->getPosX()-player->getRadius()-5, player->getPosY()-player->getRadius()-5);
+    // rotate the circle
+    circle.rotate(player->getRotation()+30.f);
     // draw the circle
     window->draw(circle);
+    player->setRotation(circle.getRotation());
 }
 
 void displayBot(sf::RenderWindow *window, Bot *bot){
