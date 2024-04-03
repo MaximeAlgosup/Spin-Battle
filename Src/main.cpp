@@ -42,20 +42,24 @@ int main()
     Menu menu(menuTitle, menuBackgroundPath, fontPath, sf::Color{39, 1, 0, 255}, menuMusicPath);
     menu.run(&window);
 
-    // init select menu
-    SelectMenu selectMenu(selectMenuTitle, selectMenuBackgroundPath, fontPath, sf::Color{39, 1, 0, 255}, selectMenuMusicPath, player1SpritePath);
-    selectMenu.run(&window);
+    while (true)
+    {
+        // init arena
+        Arena arena((sf::VideoMode::getDesktopMode().width/2), (sf::VideoMode::getDesktopMode().height/2), ARENA_RADIUS, 1, 0, arenaBackgroundPath, arenaThemePath, fontPath, sf::Color::White, arenaMusicPath);
 
-    // init arena
-    Arena arena((sf::VideoMode::getDesktopMode().width/2), (sf::VideoMode::getDesktopMode().height/2), ARENA_RADIUS, 1, 0, arenaBackgroundPath, arenaThemePath, fontPath, sf::Color::White, arenaMusicPath);
+        // init players
+        Player player1(arena.getCenterX()+70, arena.getCenterY(), 15, 15, 10000, 5, sf::Color::Red, player1SpritePath);
+        Player player2(arena.getCenterX()-70, arena.getCenterY(), 15, 15, 10000, 5, sf::Color::Blue, player2SpritePath);
 
-    // init players
-    Player player1(arena.getCenterX()+70, arena.getCenterY(), 15, 15, 10000, 5, sf::Color::Red, player1SpritePath);
-    Player player2(arena.getCenterX()-70, arena.getCenterY(), 15, 15, 10000, 5, sf::Color::Blue, player2SpritePath);
 
-    // init party
-    Party party(&player1, &player2, &arena, &window);
-    party.run();
+        // init select menu
+        SelectMenu selectMenu(selectMenuTitle, selectMenuBackgroundPath, fontPath, sf::Color{39, 1, 0, 255}, selectMenuMusicPath, player1SpritePath);
+        selectMenu.run(&window);
+
+        // init party
+        Party party(&player1, &player2, &arena, &window);
+        party.run();
+    }
     
     exit(EXIT_SUCCESS);
 }

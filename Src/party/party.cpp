@@ -163,7 +163,7 @@ void Party::update(){
 
 void Party::win(int player){
     bool isdisplayed = false;
-    while(!sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
+    while(!sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)){
         displayWin(window, player);
         if(!isdisplayed){
             isdisplayed = true;
@@ -174,7 +174,7 @@ void Party::win(int player){
 
 void Party::equality(){
     bool isdisplayed = false;
-    while(!sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
+    while(!sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)){
         displayDraw(window);
         if(!isdisplayed){
             isdisplayed = true;

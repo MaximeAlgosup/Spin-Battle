@@ -19,7 +19,7 @@ void SelectMenu::run(sf::RenderWindow *window){
     this->playMusic();
     bool menu = true;
     this->playMusic();
-    sf::sleep(sf::milliseconds(50));
+    sf::sleep(sf::milliseconds(200));
     while (menu){
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)){
             switch(this->type){
