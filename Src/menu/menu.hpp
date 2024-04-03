@@ -12,6 +12,7 @@ class Menu{
         sf::Color fontColor;
         char* soundPath;
         sf::Music music;
+        bool isMusicPlaying;
 
     public:
 
@@ -146,4 +147,13 @@ class Menu{
                 void
         */
         void stopMusic();
+
+        /*
+            Pause the sound of the menu
+            params:
+                void
+            return:
+                void
+        */
+        void pauseMusic();
 };

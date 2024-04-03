@@ -68,6 +68,13 @@ void SelectMenu::run(sf::RenderWindow *window){
             this->type = SelectMenuType::EXIT;
         }
 
+        if(this->isMusicPlaying == true && this->setting->getIsMusicOn() == false){
+            this->pauseMusic();
+        }
+        else if(this->isMusicPlaying == false && this->setting->getIsMusicOn() == true){
+            this->playMusic();
+        }
+
         // Display the menu
         displayMenu(window, this);
         displaySelectOption(window, playText, 50, 150, this);

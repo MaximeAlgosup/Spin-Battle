@@ -102,6 +102,26 @@ void displaySettingCursor(sf::RenderWindow *window, Setting *setting, int x, int
 void displaySoundState(sf::RenderWindow *window, Setting *setting);
 
 /*
+    Display the stadium state
+    params:
+        window: the window to display the stadium state
+        setting: the setting to display the stadium state
+    return:
+        void
+*/
+void displayStadiumState(sf::RenderWindow *window, Setting *setting);
+
+/*
+    Display the theme state
+    params:
+        window: the window to display the theme state
+        setting: the setting to display the theme state
+    return:
+        void
+*/
+void displayThemeState(sf::RenderWindow *window, Setting *setting);
+
+/*
     Display the background of the game
     params:
         window: the window to display the background

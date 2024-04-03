@@ -18,8 +18,8 @@ char selectMenuTitle[] = "Select an option";
 // Backgrounds
 char menuBackgroundPath[] = "../Src/assets/pictures/menu.jpg";
 char selectMenuBackgroundPath[] = "../Src/assets/pictures/selectMenu.jpg";
-char arenaBackgroundPath[] = "../Src/assets/pictures/space.png";
-char arenaThemePath[] = "../Src/assets/pictures/stadium1.png";
+char stadiumPath[] = "../Src/assets/pictures/stadium1.png";
+char ThemePath[] = "../Src/assets/pictures/theme1.png";
 
 // Sprites
 char player1SpritePath[] = "../Src/assets/sprites/ldrago.png";
@@ -47,7 +47,7 @@ int main()
     while (true)
     {
         // init arena
-        Arena arena((window.getSize().x/2), (window.getSize().y/2), ARENA_RADIUS, 1, 0, arenaBackgroundPath, arenaThemePath, fontPath, sf::Color::White, arenaMusicPath);
+        Arena arena((window.getSize().x/2), (window.getSize().y/2), ARENA_RADIUS, 1, 0, ThemePath, stadiumPath, fontPath, sf::Color::White, arenaMusicPath);
 
         // init players
         Player player1(arena.getCenterX()+70, arena.getCenterY(), 15, 15, 10000, 5, sf::Color::Red, player1SpritePath);

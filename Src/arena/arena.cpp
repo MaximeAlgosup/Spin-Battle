@@ -2,24 +2,24 @@
 #include <iostream>
 #include <fstream>
 
-Arena::Arena(int x, int y, int r, int l, int s, char* backgroundPath, char *themePath, char* fontPath, sf::Color fontColor, char* soundPath){
+Arena::Arena(int x, int y, int r, int l, int s, char* themePath, char *stadiumPath, char* fontPath, sf::Color fontColor, char* soundPath){
     this->center_x = x;
     this->center_y = y;
     this->radius = r;
     this->level = l;
     this->score = s;
     // Check if the background image exists
-    if(!std::ifstream(backgroundPath)){
+    if(!std::ifstream(themePath)){
         std::cerr << "Error loading background image" << std::endl;
         exit(EXIT_FAILURE);
     }
-    this->backgroundPath = backgroundPath;
+    this->themePath = themePath;
     // Check if the theme exists
-    if(!std::ifstream(themePath)){
-        std::cerr << "Error loading theme" << std::endl;
+    if(!std::ifstream(stadiumPath)){
+        std::cerr << "Error loading stadium image" << std::endl;
         exit(EXIT_FAILURE);
     }
-    this->themePath = themePath;
+    this->stadiumPath = stadiumPath;
     // Check if the font exists
     if(!std::ifstream(fontPath)){
         std::cerr << "Error loading font" << std::endl;
@@ -57,12 +57,12 @@ int Arena::getScore(){
     return this->score;
 }
 
-char* Arena::getBackgroundPath(){
-    return this->backgroundPath;
-}
-
 char* Arena::getThemePath(){
     return this->themePath;
+}
+
+char* Arena::getStadiumPath(){
+    return this->stadiumPath;
 }
 
 char* Arena::getFontPath(){
@@ -99,22 +99,22 @@ int Arena::setSize(){
     return this->radius;
 }
 
-void Arena::setBackgroundPath(char* backgroundPath){
+void Arena::setThemePath(char* themePath){
     // Check if the background image exists
-    if(!std::ifstream(backgroundPath)){
+    if(!std::ifstream(themePath)){
         std::cerr << "Error loading background image" << std::endl;
         exit(EXIT_FAILURE);
     }
-    this->backgroundPath = backgroundPath;
+    this->themePath = themePath;
 }
 
-void Arena::setThemePath(char* themePath){
+void Arena::setStadiumPath(char* stadiumPath){
     // Check if the theme exists
-    if(!std::ifstream(themePath)){
+    if(!std::ifstream(stadiumPath)){
         std::cerr << "Error loading theme" << std::endl;
         exit(EXIT_FAILURE);
     }
-    this->themePath = themePath;
+    this->stadiumPath = stadiumPath;
 }
 
 void Arena::setFontPath(char* fontPath){

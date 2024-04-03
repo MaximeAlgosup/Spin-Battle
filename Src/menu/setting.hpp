@@ -11,7 +11,7 @@ enum class SettingType{
 
 class Setting{
 
-    private:
+    protected:
         SettingType type;
         int stadiumID;
         int themeID;

@@ -114,8 +114,15 @@ char* Menu::getSoundPath(){
 
 void Menu::playMusic(){
     music.play();
+    this->isMusicPlaying = true;
 }
 
 void Menu::stopMusic(){
     music.stop();
+    this->isMusicPlaying = false;
+}
+
+void Menu::pauseMusic(){
+    music.pause();
+    this->isMusicPlaying = false;
 }

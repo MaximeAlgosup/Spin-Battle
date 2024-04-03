@@ -45,7 +45,30 @@ void Setting::run(sf::RenderWindow *window){
                 this->isMusicOn = !this->isMusicOn;
             }
             sf::sleep(sf::milliseconds(50));
-
+        }
+        else if(this->type == SettingType::STADIUM && sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
+            if(this->stadiumID > 1){
+                this->stadiumID -= 1;
+                sf::sleep(sf::milliseconds(50));
+            }
+        }
+        else if(this->type == SettingType::STADIUM && sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
+            if(this->stadiumID < 3){
+                this->stadiumID += 1;
+                sf::sleep(sf::milliseconds(50));
+            }
+        }
+        else if(this->type == SettingType::THEME && sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
+            if(this->themeID > 1){
+                this->themeID -= 1;
+                sf::sleep(sf::milliseconds(50));
+            }
+        }
+        else if(this->type == SettingType::THEME && sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
+            if(this->themeID < 3){
+                this->themeID += 1;
+                sf::sleep(sf::milliseconds(50));
+            }
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)){
             this->selectOptionDown();
@@ -165,8 +188,10 @@ void Setting::selectOptionUp(){
 void Setting::displaySettingStates(sf::RenderWindow *window){
     switch(this->type){
         case SettingType::STADIUM:
+            displayStadiumState(window, this);
             break;
         case SettingType::THEME:
+            displayThemeState(window, this);
             break;
         case SettingType::MUSIC:
             displaySoundState(window, this);

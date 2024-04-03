@@ -183,12 +183,78 @@ void displaySoundState(sf::RenderWindow *window, Setting *setting){
     window->draw(text);
 }
 
+void displayStadiumState(sf::RenderWindow *window, Setting *setting){
+    // create rectangle
+    sf::RectangleShape rectangle(sf::Vector2f(600, 100));
+    rectangle.setFillColor(setting->getFontColor());
+    rectangle.setOutlineColor(sf::Color::White);
+    rectangle.setOutlineThickness(5);
+    rectangle.setPosition(window->getSize().x/2-200, 150);
+    window->draw(rectangle);
+    // create a text
+    sf::Font font;
+    if(!font.loadFromFile(setting->getFontPath())){
+        std::cerr << "Error loading font" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+    sf::Text text;
+    text.setFont(font);
+    switch (setting->getStadiumID()){
+    case 1:
+        text.setString("Stadium: < | * * >");
+        break;
+    case 2:
+        text.setString("Stadium: < * | * >");
+        break;
+    case 3:
+        text.setString("Stadium: < * * | >");
+        break;
+    }
+    text.setCharacterSize(70);
+    text.setFillColor(sf::Color::White);
+    text.setPosition(window->getSize().x/2-190, 160);
+    window->draw(text);
+}
+
+void displayThemeState(sf::RenderWindow *window, Setting *setting){
+    // create rectangle
+    sf::RectangleShape rectangle(sf::Vector2f(600, 100));
+    rectangle.setFillColor(setting->getFontColor());
+    rectangle.setOutlineColor(sf::Color::White);
+    rectangle.setOutlineThickness(5);
+    rectangle.setPosition(window->getSize().x/2-200, 300);
+    window->draw(rectangle);
+    // create a text
+    sf::Font font;
+    if(!font.loadFromFile(setting->getFontPath())){
+        std::cerr << "Error loading font" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+    sf::Text text;
+    text.setFont(font);
+    switch (setting->getThemeID()){
+    case 1:
+        text.setString("Theme: < | * * >");
+        break;
+    case 2:
+        text.setString("Theme: < * | * >");
+        break;
+    case 3:
+        text.setString("Theme: < * * | >");
+        break;
+    }
+    text.setCharacterSize(70);
+    text.setFillColor(sf::Color::White);
+    text.setPosition(window->getSize().x/2-190, 310);
+    window->draw(text);
+}
+
 void displayBackground(sf::RenderWindow *window, Arena *arena){
     // set background image
     sf::Texture BackgroundTexture;
     sf::Sprite background;
     
-    if(!BackgroundTexture.loadFromFile(arena->getBackgroundPath())){
+    if(!BackgroundTexture.loadFromFile(arena->getThemePath())){
       exit(EXIT_FAILURE);
     }
     else
@@ -203,7 +269,7 @@ void displayArena(sf::RenderWindow *window, Arena *arena){
     sf::CircleShape circle(arena->getRadius());
     circle.setFillColor(sf::Color{128, 128, 128, 255});
     sf::Texture texture;
-    if (!texture.loadFromFile(arena->getThemePath())){
+    if (!texture.loadFromFile(arena->getStadiumPath())){
         exit(EXIT_FAILURE);
 
     }
