@@ -101,53 +101,100 @@ void Party::keybordEvent(){
         }
     }
     // move player 1
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && sf::Keyboard::isKeyPressed(sf::Keyboard::Up)){
+        // Check if the spinner is out of the screen
+        if((player1->getPosX() - player1->getRadius()) > 10 && (player1->getPosY() - player1->getRadius()) > 10){
+            player1->moveUpLeft();
+        }
+    }
+    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && sf::Keyboard::isKeyPressed(sf::Keyboard::Down)){
+        // Check if the spinner is out of the screen
+        if((player1->getPosX() - player1->getRadius()) > 10 && (player1->getPosY() + player1->getRadius()) < window->getSize().y){
+            player1->moveDownLeft();
+        }
+    }
+    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && sf::Keyboard::isKeyPressed(sf::Keyboard::Up)){
+        // Check if the spinner is out of the screen
+        if((player1->getPosX() + player1->getRadius()) < window->getSize().x && (player1->getPosY() - player1->getRadius()) > 10){
+            player1->moveUpRight();
+        }
+    }
+    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && sf::Keyboard::isKeyPressed(sf::Keyboard::Down)){
+        // Check if the spinner is out of the screen
+        if((player1->getPosX() + player1->getRadius()) < window->getSize().x && (player1->getPosY() + player1->getRadius()) < window->getSize().y){
+            player1->moveDownRight();
+        }
+    }
+    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
         // Check if the spinner is out of the screen
         if((player1->getPosX() - player1->getRadius()) > 10){
             player1->moveLeft();
         }
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
+    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
         if((player1->getPosX() + player1->getRadius()) < window->getSize().x){
             player1->moveRight();
         }
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)){
+    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)){
         if((player1->getPosY() - player1->getRadius()) > 10){
             player1->moveUp();
         }
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)){
+    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)){
         if((player1->getPosY() + player1->getRadius()) < window->getSize().y){
             player1->moveDown();
         }
     }
     // move player 2
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::W) && sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
+        // Check if the spinner is out of the screen
+        if((player2->getPosX() - player2->getRadius()) > 10 && (player2->getPosY() - player2->getRadius()) > 10){
+            player2->moveUpLeft();
+        }
+    }
+    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A) && sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
+        // Check if the spinner is out of the screen
+        if((player2->getPosX() - player2->getRadius()) > 10 && (player2->getPosY() + player2->getRadius()) < window->getSize().y){
+            player2->moveDownLeft();
+        }
+    }
+    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::W) && sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
+        // Check if the spinner is out of the screen
+        if((player2->getPosX() + player2->getRadius()) < window->getSize().x && (player2->getPosY() - player2->getRadius()) > 10){
+            player2->moveUpRight();
+        }
+    }
+    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D) && sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
+        // Check if the spinner is out of the screen
+        if((player2->getPosX() + player2->getRadius()) < window->getSize().x && (player2->getPosY() + player2->getRadius()) < window->getSize().y){
+            player2->moveDownRight();
+        }
+    }
+    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
         // Check if the spinner is out of the screen
         if((player2->getPosX() - player2->getRadius()) > 10){
             player2->moveLeft();
         }
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
+    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
         if((player2->getPosX() + player2->getRadius()) < window->getSize().x){
             player2->moveRight();
         }
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)){
+    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)){
         if((player2->getPosY() - player2->getRadius()) > 10){
             player2->moveUp();
         }
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
+    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
         if((player2->getPosY() + player2->getRadius()) < window->getSize().y){
             player2->moveDown();
         }
     }
-    else{
-        player1->autoMove();
-        player2->autoMove();
-    }
+    
+    player1->autoMove();
+    player2->autoMove();
 }
 
 

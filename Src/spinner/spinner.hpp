@@ -5,6 +5,10 @@ enum Direction{
             DOWN,
             LEFT,
             RIGHT,
+            UP_LEFT,
+            UP_RIGHT,
+            DOWN_LEFT,
+            DOWN_RIGHT,
             NONE
         };
 
@@ -167,6 +171,42 @@ class Spinner{
                 void
         */
         void moveRight();
+
+        /*
+            Move the spinner up right
+            params:
+                void
+            return:
+                void
+        */
+        void moveUpRight();
+
+        /*
+            Move the spinner up left
+            params:
+                void
+            return:
+                void
+        */
+        void moveUpLeft();
+
+        /*
+            Move the spinner down right
+            params:
+                void
+            return:
+                void
+        */
+        void moveDownRight();
+
+        /*
+            Move the spinner down left
+            params:
+                void
+            return:
+                void
+        */
+        void moveDownLeft();
 
         /*
             Move the spinner automatically following the inertia
