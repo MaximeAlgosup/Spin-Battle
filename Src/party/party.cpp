@@ -22,8 +22,10 @@ Party::Party(Player *player1, Player *player2, Arena *arena, sf::RenderWindow *w
     this->inGame = true;
 }
 
-void Party::run(){
-    this->arena->playMusic();
+void Party::run(Setting *settings){
+    if(settings->getIsMusicOn() == true){
+        this->arena->playMusic();
+    }
     auto start = std::chrono::system_clock::now();
     while(this->inGame){
         // Events

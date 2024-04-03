@@ -25,8 +25,6 @@ add_executable(Spin-Battle
     Src/menu/menu.cpp
     Src/menu/selectMenu.cpp
     Src/menu/setting.cpp
-    Src/menu/stadiumMenu.cpp
-    Src/menu/themeMenu.cpp
     Src/menu/credit.cpp
     Src/party/party.cpp
 )

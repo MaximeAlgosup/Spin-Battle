@@ -19,9 +19,14 @@ SelectMenu::SelectMenu(char* title, char* backgroundPath, char* fontPath, sf::Co
 
 void SelectMenu::run(sf::RenderWindow *window, Arena *arena){
     // Play music
-    this->playMusic();
+    if(this->setting->getIsMusicOn() == true){
+        this->playMusic();
+    }
     bool menu = true;
-    this->playMusic();
+    // Set arena theme
+    arena->setThemeID(this->setting->getThemeID());
+    arena->setStadiumID(this->setting->getStadiumID());
+
     // Display the menu
     displayMenu(window, this);
     displaySelectOption(window, playText, 50, 150, this);
@@ -31,6 +36,7 @@ void SelectMenu::run(sf::RenderWindow *window, Arena *arena){
     std::array<int, 2> cursorPosition = this->getSelectedPosition();
     displayMenuCursor(window, this, cursorPosition[0], cursorPosition[1], this->cursorSpritePath);
     window->display();
+
     sf::sleep(sf::milliseconds(200));
     while (menu){
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)){
@@ -99,6 +105,10 @@ void SelectMenu::setCursorRotation(float cursorRotation){
     this->cursorRotation = cursorRotation;
 }
 
+void SelectMenu::setSetting(Setting *setting){
+    this->setting = setting;
+}
+
 SelectMenuType SelectMenu::getType(){
     return this->type;
 }
@@ -125,6 +135,10 @@ std::array<int, 2> SelectMenu::getSelectedPosition() {
 
 float SelectMenu::getCursorRotation(){
     return this->cursorRotation;
+}
+
+Setting* SelectMenu::getSetting(){
+    return this->setting;
 }
 
 

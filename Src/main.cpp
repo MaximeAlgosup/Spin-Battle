@@ -5,6 +5,7 @@
 #include "menu.hpp"
 #include "selectMenu.hpp"
 #include "display.hpp"
+#include "setting.hpp"
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 
@@ -44,6 +45,10 @@ int main()
     Menu menu(menuTitle, menuBackgroundPath, fontPath, sf::Color{39, 1, 0, 255}, menuMusicPath);
     menu.run(&window);
 
+    // init settings
+    Setting settings(sf::Color{39, 1, 0, 255}, fontPath, selectMenuBackgroundPath, player1SpritePath);
+    Setting *settingsPtr = &settings;
+
     while (true)
     {
         // init arena
@@ -56,11 +61,14 @@ int main()
 
         // init select menu
         SelectMenu selectMenu(selectMenuTitle, selectMenuBackgroundPath, fontPath, sf::Color{39, 1, 0, 255}, selectMenuMusicPath, player1SpritePath);
+        selectMenu.setSetting(settingsPtr);
         selectMenu.run(&window, &arena);
+
+        settingsPtr = selectMenu.getSetting();
 
         // init party
         Party party(&player1, &player2, &arena, &window);
-        party.run();
+        party.run(settingsPtr);
     }
     
     exit(EXIT_SUCCESS);

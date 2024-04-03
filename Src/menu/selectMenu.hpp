@@ -64,6 +64,16 @@ class SelectMenu : public Menu{
         */
         void setCursorRotation(float cursorRotation);
 
+
+        /*
+            Set the setting
+            params:
+                setting: the setting object
+            return:
+                void
+        */
+        void setSetting(Setting *setting);
+
         /*
             Get the type of the menu
             params:
@@ -91,6 +101,15 @@ class SelectMenu : public Menu{
                 float: the rotation of the cursor
         */
         float getCursorRotation();
+
+        /*
+            Get the credits
+            params:
+                void
+            return:
+                Credit object
+        */
+        Setting* getSetting();
 
         /*
             Select the option down

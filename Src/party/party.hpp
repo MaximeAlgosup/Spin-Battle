@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "player.hpp"
 #include "arena.hpp"
-
+#include "setting.hpp"
 
 class Party{
     private:
@@ -44,11 +44,11 @@ class Party{
         /*
             Run the party
             params:
-                void
+                settings: the settings object
             return:
                 void
         */
-        void run();
+        void run(Setting *settings);
 
         /*
             Handle the keybord event
