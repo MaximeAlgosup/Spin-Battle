@@ -7,11 +7,13 @@ char playText[] = "Play";
 char settingsText[] = "Settings";
 char creditsText[] = "Credits";
 char exitText[] = "Exit";
+char creditText[] = "\n An ALGOSUP project \n Created by: Carbon\n To: Alan the GOAT \n\n April 2024\t\t\t->esc";
 
 SelectMenu::SelectMenu(char* title, char* backgroundPath, char* fontPath, sf::Color fontColor, char* soundPath, char* cursorSpritePath) : Menu(title, backgroundPath, fontPath, fontColor, soundPath){
     this->type = SelectMenuType::PLAY;
     this->cursorSpritePath = cursorSpritePath;
     this->cursorRotation = 0;
+    this->credits = new Credit(creditText);
 }
 
 void SelectMenu::run(sf::RenderWindow *window){
@@ -32,6 +34,7 @@ void SelectMenu::run(sf::RenderWindow *window){
                     break;
                 case SelectMenuType::CREDITS:
                     // Display the credits
+                    this->credits->run(window, this->fontPath, this->fontColor);
                     break;
                 case SelectMenuType::EXIT:
                     // Exit the game
@@ -49,6 +52,9 @@ void SelectMenu::run(sf::RenderWindow *window){
             this->selectOptionUp();
             // cooldown
             sf::sleep(sf::milliseconds(50));
+        }
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
+            this->type = SelectMenuType::EXIT;
         }
 
         // Display the menu

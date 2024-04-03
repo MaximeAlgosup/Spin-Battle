@@ -154,3 +154,15 @@ void displayWin(sf::RenderWindow *window, int player);
         void
 */
 void displayDraw(sf::RenderWindow *window);
+
+/*
+    Display the credits
+    params:
+        window: the window to display the credits
+        text: the text to display
+        fontPath: the path of the font
+        color: the color to display
+    return:
+        void
+*/
+void displayCredit(sf::RenderWindow *window, char* text, char *fontPath, sf::Color color);

@@ -247,3 +247,26 @@ void displayDraw(sf::RenderWindow *window){
     // draw the text
     window->draw(text);
 }
+
+void displayCredit(sf::RenderWindow *window, char* text, char *fontPath, sf::Color color){
+    // Create rectangle
+    sf::RectangleShape rectangle(sf::Vector2f(1000, 600));
+    rectangle.setFillColor(color);
+    rectangle.setOutlineColor(sf::Color::White);
+    rectangle.setOutlineThickness(5);
+    rectangle.setPosition(window->getSize().x/2-500, window->getSize().y/2-300);
+    window->draw(rectangle);
+    // create a text
+    sf::Font font;
+    if(!font.loadFromFile(fontPath)){
+        std::cerr << "Error loading font" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+    sf::Text credit;
+    credit.setFont(font);
+    credit.setString(text);
+    credit.setCharacterSize(70);
+    credit.setFillColor(sf::Color::White);
+    credit.setPosition(window->getSize().x/2-450, window->getSize().y/2-350);
+    window->draw(credit);
+}

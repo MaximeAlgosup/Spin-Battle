@@ -24,6 +24,10 @@ add_executable(Spin-Battle
     Src/display/display.cpp
     Src/menu/menu.cpp
     Src/menu/selectMenu.cpp
+    Src/menu/setting.cpp
+    Src/menu/stadiumMenu.cpp
+    Src/menu/themeMenu.cpp
+    Src/menu/credit.cpp
     Src/party/party.cpp
 )
 
@@ -56,3 +60,4 @@ set_target_properties(Spin-Battle
     CXX_STANDARD 17
     CXX_EXTENSIONS OFF
 )
+

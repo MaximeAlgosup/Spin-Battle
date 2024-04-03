@@ -5,7 +5,7 @@
 
 class Menu{
 
-    private:
+    protected:
         char* title;
         char* backgroundPath;
         char* fontPath;

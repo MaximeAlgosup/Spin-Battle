@@ -1,6 +1,7 @@
 #pragma once
 #include <array>
 #include "menu.hpp"
+#include "credit.hpp"
 
 enum class SelectMenuType{
     PLAY,
@@ -14,6 +15,7 @@ class SelectMenu : public Menu{
         SelectMenuType type;
         char* cursorSpritePath;
         float cursorRotation;
+        Credit *credits;
 
     public:
 
