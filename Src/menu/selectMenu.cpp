@@ -14,6 +14,7 @@ SelectMenu::SelectMenu(char* title, char* backgroundPath, char* fontPath, sf::Co
     this->cursorSpritePath = cursorSpritePath;
     this->cursorRotation = 0;
     this->credits = new Credit(creditText);
+    this->setting = new Setting(fontColor, fontPath, backgroundPath, cursorSpritePath);
 }
 
 void SelectMenu::run(sf::RenderWindow *window){
@@ -21,6 +22,15 @@ void SelectMenu::run(sf::RenderWindow *window){
     this->playMusic();
     bool menu = true;
     this->playMusic();
+    // Display the menu
+    displayMenu(window, this);
+    displaySelectOption(window, playText, 50, 150, this);
+    displaySelectOption(window, settingsText, 50, 300, this);
+    displaySelectOption(window, creditsText, 50, 450, this);
+    displaySelectOption(window, exitText, 50, 600, this);
+    std::array<int, 2> cursorPosition = this->getSelectedPosition();
+    displayMenuCursor(window, this, cursorPosition[0], cursorPosition[1], this->cursorSpritePath);
+    window->display();
     sf::sleep(sf::milliseconds(200));
     while (menu){
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)){
@@ -31,6 +41,7 @@ void SelectMenu::run(sf::RenderWindow *window){
                     break;
                 case SelectMenuType::SETTINGS:
                     // Display the settings
+                    this->setting->run(window);
                     break;
                 case SelectMenuType::CREDITS:
                     // Display the credits

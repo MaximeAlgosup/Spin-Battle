@@ -53,6 +53,54 @@ void displaySelectOption(sf::RenderWindow *window, char* text, int x, int y, Men
 */
 void displayMenuCursor(sf::RenderWindow *window, SelectMenu *menu, int x, int y, char* cursorSpritePath);
 
+
+/*
+    Display the setting of the game
+    params:
+        window: the window to display the setting
+        setting: the setting to display
+    return:
+        void
+*/
+void displaySetting(sf::RenderWindow *window, Setting *setting);
+
+
+/*
+    Display the setting option
+    params:
+        window: the window to display the setting text
+        setting: the setting to display the setting text
+        text: the text to display
+        x: the x position of the text
+        y: the y position of the text
+    return:
+        void
+*/
+void displaySettingOption(sf::RenderWindow *window, Setting *setting, char* text, int x, int y);
+
+/*
+    Display the setting cursor
+    params:
+        window: the window to display the setting cursor
+        setting: the setting to display the setting cursor
+        x: the x position of the cursor
+        y: the y position of the cursor
+        cursorSpritePath: the path of the cursor sprite
+    return:
+        void
+*/
+void displaySettingCursor(sf::RenderWindow *window, Setting *setting, int x, int y, char* cursorSpritePath);
+
+/*
+    Display the sound state
+    params:
+        window: the window to display the sound state
+        setting: the setting to display the sound state
+    return:
+        void
+*/
+void displaySoundState(sf::RenderWindow *window, Setting *setting);
+
 /*
     Display the background of the game
     params:

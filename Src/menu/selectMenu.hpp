@@ -2,6 +2,7 @@
 #include <array>
 #include "menu.hpp"
 #include "credit.hpp"
+#include "setting.hpp"
 
 enum class SelectMenuType{
     PLAY,
@@ -16,6 +17,7 @@ class SelectMenu : public Menu{
         char* cursorSpritePath;
         float cursorRotation;
         Credit *credits;
+        Setting *setting;
 
     public:
 

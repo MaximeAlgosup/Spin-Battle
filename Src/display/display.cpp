@@ -76,6 +76,113 @@ void displayMenuCursor(sf::RenderWindow *window, SelectMenu *menu, int x, int y,
     menu->setCursorRotation(menu->getCursorRotation()+30.f);
 }
 
+void displaySetting(sf::RenderWindow *window, Setting *setting){
+    // Set background color
+    sf::Texture BackgroundTexture;
+    sf::Sprite background;
+    
+    if(!BackgroundTexture.loadFromFile(setting->getBackgroundPath())){
+      exit(EXIT_FAILURE);
+    }
+    else
+    {
+      background.setTexture(BackgroundTexture);
+    }
+    // create a text
+    sf::Font font;
+    if(!font.loadFromFile(setting->getFontPath())){
+        std::cerr << "Error loading font" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+    sf::Text text;
+    text.setFont(font);
+    text.setString("Settings");
+    text.setCharacterSize(100);
+    text.setFillColor(setting->getFontColor());
+    text.setPosition(window->getSize().x/2-180, 50);
+
+    sf::Text esc;
+    esc.setFont(font);
+    esc.setString("->esc");
+    esc.setCharacterSize(70);
+    esc.setFillColor(sf::Color::White);
+    esc.setPosition(window->getSize().x-300, window->getSize().y-140);
+    
+    // draw
+    window->draw(background);
+    window->draw(text);
+    window->draw(esc);
+}
+
+void displaySettingOption(sf::RenderWindow *window, Setting *setting, char* text, int x, int y){
+    // create rectangle
+    sf::RectangleShape rectangle(sf::Vector2f(400, 100));
+    rectangle.setFillColor(setting->getFontColor());
+    rectangle.setOutlineColor(sf::Color::White);
+    rectangle.setOutlineThickness(5);
+    rectangle.setPosition(x, y);
+    window->draw(rectangle);
+    // create a text
+    sf::Font font;
+    if(!font.loadFromFile(setting->getFontPath())){
+        std::cerr << "Error loading font" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+    sf::Text option;
+    option.setFont(font);
+    option.setString(text);
+    option.setCharacterSize(70);
+    option.setFillColor(sf::Color::White);
+    option.setPosition(x+10, y+10);
+    window->draw(option);
+}
+
+void displaySettingCursor(sf::RenderWindow *window, Setting *setting, int x, int y, char* cursorSpritePath){
+    // create a circle
+    sf::CircleShape circle(50);
+    sf::Texture texture;
+    if (!texture.loadFromFile(cursorSpritePath)){
+        exit(EXIT_FAILURE);
+    }
+    else{
+        circle.setTexture(&texture);
+    }
+    circle.rotate(setting->getCursorRotation()-167.f);
+    circle.setOrigin(50, 50);
+    circle.setPosition(x+350, y+50);
+    // draw the circle
+    window->draw(circle);
+    setting->setRotation(setting->getCursorRotation()+30.f);
+}
+
+void displaySoundState(sf::RenderWindow *window, Setting *setting){
+    // create rectangle
+    sf::RectangleShape rectangle(sf::Vector2f(400, 100));
+    rectangle.setFillColor(setting->getFontColor());
+    rectangle.setOutlineColor(sf::Color::White);
+    rectangle.setOutlineThickness(5);
+    rectangle.setPosition(window->getSize().x/2-200, 450);
+    window->draw(rectangle);
+    // create a text
+    sf::Font font;
+    if(!font.loadFromFile(setting->getFontPath())){
+        std::cerr << "Error loading font" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+    sf::Text text;
+    text.setFont(font);
+    if(setting->getIsMusicOn()){
+        text.setString("Music: On");
+    }
+    else{
+        text.setString("Music: Off");
+    }
+    text.setCharacterSize(70);
+    text.setFillColor(sf::Color::White);
+    text.setPosition(window->getSize().x/2-190, 460);
+    window->draw(text);
+}
+
 void displayBackground(sf::RenderWindow *window, Arena *arena){
     // set background image
     sf::Texture BackgroundTexture;
