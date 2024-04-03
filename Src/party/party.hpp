@@ -12,6 +12,7 @@ class Party{
         Arena *arena;
         sf::RenderWindow *window;
         int time;
+        bool inGame;
     public:
         
         /*

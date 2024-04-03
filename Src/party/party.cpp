@@ -10,6 +10,7 @@ Party::Party(Player *player1, Player *player2, Arena *arena, sf::RenderWindow *w
     this->arena = arena;
     this->window = window;
     this->time = 100;
+    this->inGame = true;
 }
 
 Party::Party(Player *player1, Player *player2, Arena *arena, sf::RenderWindow *window, int time){
@@ -18,12 +19,13 @@ Party::Party(Player *player1, Player *player2, Arena *arena, sf::RenderWindow *w
     this->arena = arena;
     this->window = window;
     this->time = time;
+    this->inGame = true;
 }
 
 void Party::run(){
     this->arena->playMusic();
     auto start = std::chrono::system_clock::now();
-    while(window->isOpen()){
+    while(this->inGame){
         // Events
         keybordEvent();
         // Actions
@@ -93,8 +95,7 @@ void Party::keybordEvent(){
     while (window->pollEvent(event)){
         // "close requested" event: we close the window
         if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
-            window->close();
-            exit(EXIT_SUCCESS);
+            inGame = false;
         }
     }
     // move player 1
@@ -104,18 +105,18 @@ void Party::keybordEvent(){
             player1->moveLeft();
         }
     }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
-        if((player1->getPosX() + player1->getRadius()) < sf::VideoMode::getDesktopMode().width){
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
+        if((player1->getPosX() + player1->getRadius()) < window->getSize().x){
             player1->moveRight();
         }
     }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)){
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)){
         if((player1->getPosY() - player1->getRadius()) > 10){
             player1->moveUp();
         }
     }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)){
-        if((player1->getPosY() + player1->getRadius()) < sf::VideoMode::getDesktopMode().height){
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)){
+        if((player1->getPosY() + player1->getRadius()) < window->getSize().y){
             player1->moveDown();
         }
     }
@@ -126,18 +127,18 @@ void Party::keybordEvent(){
             player2->moveLeft();
         }
     }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
-        if((player2->getPosX() + player2->getRadius()) < sf::VideoMode::getDesktopMode().width){
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
+        if((player2->getPosX() + player2->getRadius()) < window->getSize().x){
             player2->moveRight();
         }
     }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)){
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)){
         if((player2->getPosY() - player2->getRadius()) > 10){
             player2->moveUp();
         }
     }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
-        if((player2->getPosY() + player2->getRadius()) < sf::VideoMode::getDesktopMode().height){
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
+        if((player2->getPosY() + player2->getRadius()) < window->getSize().y){
             player2->moveDown();
         }
     }

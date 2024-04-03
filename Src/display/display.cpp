@@ -31,7 +31,7 @@ void displayMenuText(sf::RenderWindow *window, Menu *menu){
     text.setString(menu->getTitle());
     text.setCharacterSize(70);
     text.setFillColor(menu->getFontColor());
-    text.setPosition(sf::VideoMode::getDesktopMode().width/2-300, 100);
+    text.setPosition(window->getSize().x/2-300, 100);
     window->draw(text);
 }
 
@@ -94,6 +94,7 @@ void displayBackground(sf::RenderWindow *window, Arena *arena){
 void displayArena(sf::RenderWindow *window, Arena *arena){
     // create a circle
     sf::CircleShape circle(arena->getRadius());
+    circle.setFillColor(sf::Color{128, 128, 128, 255});
     sf::Texture texture;
     if (!texture.loadFromFile(arena->getThemePath())){
         exit(EXIT_FAILURE);
@@ -102,8 +103,6 @@ void displayArena(sf::RenderWindow *window, Arena *arena){
     else{
         circle.setTexture(&texture);
     }
-    circle.setOutlineColor(sf::Color::Yellow);
-    circle.setOutlineThickness(10);
     circle.setPosition(arena->getCenterX()-arena->getRadius()-10, arena->getCenterY()-arena->getRadius()-10);
     // draw the circle
     window->draw(circle);
@@ -205,7 +204,7 @@ void displayGameOver(sf::RenderWindow *window){
     text.setString("Game Over");
     text.setCharacterSize(100);
     text.setFillColor(sf::Color::Red);
-    text.setPosition(sf::VideoMode::getDesktopMode().width/2-280, sf::VideoMode::getDesktopMode().height/2-50);
+    text.setPosition(window->getSize().x/2-280, window->getSize().y/2-50);
     // draw the text
     window->draw(text);
 }
@@ -227,7 +226,7 @@ void displayWin(sf::RenderWindow *window, int player){
     }
     text.setCharacterSize(100);
     text.setFillColor(sf::Color::Green);
-    text.setPosition(sf::VideoMode::getDesktopMode().width/2-400, sf::VideoMode::getDesktopMode().height/2-50);
+    text.setPosition(window->getSize().x/2-400, window->getSize().y/2-50);
     // draw the text
     window->draw(text);
 }
@@ -244,7 +243,7 @@ void displayDraw(sf::RenderWindow *window){
     text.setString("Draw!");
     text.setCharacterSize(100);
     text.setFillColor(sf::Color::Yellow);
-    text.setPosition(sf::VideoMode::getDesktopMode().width/2-250, sf::VideoMode::getDesktopMode().height/2-50);
+    text.setPosition(window->getSize().x/2-250, window->getSize().y/2-50);
     // draw the text
     window->draw(text);
 }
