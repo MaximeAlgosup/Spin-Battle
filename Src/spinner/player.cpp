@@ -14,6 +14,7 @@ Player::Player(unsigned int x, unsigned int y, int w, int s, int i, int a, sf::C
         exit(EXIT_FAILURE);
     }
     this->spritePath = spritePath;
+    roundWins = 0;
 }
 
 int Player::getScore(){
@@ -26,6 +27,10 @@ int Player::getLevel(){
 
 sf::Color Player::getRingColor(){
     return this->ringColor;
+}
+
+int Player::getRoundWins(){
+    return this->roundWins;
 }
 
 char* Player::getSpritePath(){
@@ -94,4 +99,20 @@ void Player::teleport(){
             break;
         }
     }
+}
+
+void Player::increaseRoundWins(){
+    this->roundWins++;
+}
+
+void Player::reset(int x, int y){
+    this->score = 0;
+    this->level = 1;
+    this->isDead = false;
+    this->rotation = 0;
+    this->direction = NONE;
+    this->inertia = 0;
+    this->speed = 0;
+    this->pos_x = x;
+    this->pos_y = y;
 }

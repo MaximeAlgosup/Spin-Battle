@@ -54,8 +54,8 @@ int main()
         Arena arena((window.getSize().x/2), (window.getSize().y/2), ARENA_RADIUS, 1, 0, ThemePath, stadiumPath, fontPath, sf::Color::White, arenaMusicPath);
 
         // init players
-        Player player1(arena.getCenterX()+70, arena.getCenterY(), 15, 30, 15000, 30, sf::Color::Red, player1SpritePath);
-        Player player2(arena.getCenterX()-70, arena.getCenterY(), 15, 30, 15000, 30, sf::Color::Blue, player2SpritePath);
+        Player player1(arena.getCenterX()+70, arena.getCenterY(), 15, 30, 7000, 20, sf::Color::Red, player1SpritePath);
+        Player player2(arena.getCenterX()-70, arena.getCenterY(), 15, 30, 7000, 20, sf::Color::Blue, player2SpritePath);
 
 
         // init select menu

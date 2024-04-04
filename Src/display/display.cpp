@@ -99,7 +99,7 @@ void displaySetting(sf::RenderWindow *window, Setting *setting){
     text.setString("Settings");
     text.setCharacterSize(100);
     text.setFillColor(setting->getFontColor());
-    text.setPosition(window->getSize().x/2-180, 50);
+    text.setPosition(window->getSize().x/2-180, 30);
 
     sf::Text esc;
     esc.setFont(font);
@@ -268,6 +268,8 @@ void displayArena(sf::RenderWindow *window, Arena *arena){
     // create a circle
     sf::CircleShape circle(arena->getRadius());
     circle.setFillColor(sf::Color{128, 128, 128, 255});
+    circle.setOutlineColor(sf::Color{128, 128, 128, 255});
+    circle.setOutlineThickness(5);
     sf::Texture texture;
     if (!texture.loadFromFile(arena->getStadiumPath())){
         exit(EXIT_FAILURE);
@@ -290,10 +292,27 @@ void displayScore1(sf::RenderWindow *window, Arena *arena, Player *player){
     }
     sf::Text text;
     text.setFont(font);
-    text.setString("Red player: " + std::to_string(player->getScore()));
+    text.setString("Score: " + std::to_string(player->getScore()));
     text.setCharacterSize(70);
-    text.setFillColor(arena->getFontColor());
-    text.setPosition(10, 110);
+    text.setFillColor(sf::Color::Red);
+    text.setPosition(window->getSize().x-300, 110);
+    // draw the text
+    window->draw(text);
+}
+
+void displayWinRound1(sf::RenderWindow *window, Arena *arena, Player *player){
+    // create a text
+    sf::Font font;
+    if(!font.loadFromFile(arena->getFontPath())){
+        std::cerr << "Error loading font" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+    sf::Text text;
+    text.setFont(font);
+    text.setString("Won: " + std::to_string(player->getRoundWins()));
+    text.setCharacterSize(70);
+    text.setFillColor(sf::Color::Red);
+    text.setPosition(window->getSize().x-300, 180);
     // draw the text
     window->draw(text);
 }
@@ -307,10 +326,27 @@ void displayScore2(sf::RenderWindow *window, Arena *arena, Player *player){
     }
     sf::Text text;
     text.setFont(font);
-    text.setString("Blue player: " + std::to_string(player->getScore()));
+    text.setString("Score: " + std::to_string(player->getScore()));
     text.setCharacterSize(70);
-    text.setFillColor(arena->getFontColor());
-    text.setPosition(10, 210);
+    text.setFillColor(sf::Color::Blue);
+    text.setPosition(10, 110);
+    // draw the text
+    window->draw(text);
+}
+
+void displayWinRound2(sf::RenderWindow *window, Arena *arena, Player *player){
+    // create a text
+    sf::Font font;
+    if(!font.loadFromFile(arena->getFontPath())){
+        std::cerr << "Error loading font" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+    sf::Text text;
+    text.setFont(font);
+    text.setString("Won: " + std::to_string(player->getRoundWins()));
+    text.setCharacterSize(70);
+    text.setFillColor(sf::Color::Blue);
+    text.setPosition(10, 180);
     // draw the text
     window->draw(text);
 }
@@ -327,7 +363,7 @@ void displayTime(sf::RenderWindow *window, Arena *arena, int time){
     text.setString("Time: " + std::to_string(time));
     text.setCharacterSize(70);
     text.setFillColor(arena->getFontColor());
-    text.setPosition(10, 10);
+    text.setPosition(window->getSize().x/2, 10);
     // draw the text
     window->draw(text);
 }
@@ -442,4 +478,59 @@ void displayCredit(sf::RenderWindow *window, char* text, char *fontPath, sf::Col
     credit.setFillColor(sf::Color::White);
     credit.setPosition(window->getSize().x/2-450, window->getSize().y/2-350);
     window->draw(credit);
+}
+
+void displayRoundNumber(sf::RenderWindow *window, Arena *arena, int round){
+    // create a text
+    sf::Font font;
+    if(!font.loadFromFile(arena->getFontPath())){
+        std::cerr << "Error loading font" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+    sf::Text text;
+    text.setFont(font);
+    text.setString("Round: " + std::to_string(round));
+    text.setCharacterSize(70);
+    text.setFillColor(arena->getFontColor());
+    text.setPosition(window->getSize().x/2-300, 10);
+    // draw the text
+    window->draw(text);
+}
+
+void displayFinalScore(sf::RenderWindow *window, Player *player1, Player *player2){
+    // create a text
+    sf::Font font;
+    if(!font.loadFromFile(FONT_PATH)){
+        std::cerr << "Error loading font" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+    sf::Text text;
+    text.setFont(font);
+    text.setString("Final Score");
+    text.setCharacterSize(100);
+    text.setFillColor(sf::Color::White);
+    text.setPosition(window->getSize().x/2-250, 30);
+    // draw the text
+    window->draw(text);
+    // create a text
+    sf::Text text1;
+    text1.setFont(font);
+    if(player1->getRoundWins() > player2->getRoundWins()){
+        text1.setString("Red player wins!");
+        text1.setFillColor(sf::Color::Red);
+        text1.setPosition(window->getSize().x/2-270, window->getSize().y/2);
+    }
+    else if(player1->getRoundWins() < player2->getRoundWins()){
+        text1.setString("Blue player wins!");
+        text1.setFillColor(sf::Color::Blue);
+        text1.setPosition(window->getSize().x/2-280, window->getSize().y/2);
+    }
+    else{
+        text1.setString("Draw!");
+        text1.setFillColor(sf::Color::Yellow);
+        text1.setPosition(window->getSize().x/2-150, window->getSize().y/2);
+    }
+    text1.setCharacterSize(70);
+    // draw the text
+    window->draw(text1);
 }

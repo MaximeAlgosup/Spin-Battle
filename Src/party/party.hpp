@@ -16,6 +16,7 @@ class Party{
         bool inGame;
         sf::SoundBuffer buffer;
         sf::Sound sound;
+        int remRound;
     public:
         
         /*
@@ -98,4 +99,12 @@ class Party{
         */
         void contactSound(bool isMusicOn);
 
+        /*
+            Display the final result
+            params:
+                void
+            return:
+                void
+        */
+        void finalResult();
 };

@@ -153,6 +153,17 @@ void displayArena(sf::RenderWindow *window, Arena *arena);
 void displayScore1(sf::RenderWindow *window, Arena *arena, Player *player);
 
 /*
+    Display the win round 1
+    params:
+        window: the window to display the win round 1
+        arena: the arena to display the win round 1
+        player: the player to display the win round 1
+    return:
+        void
+*/
+void displayWinRound1(sf::RenderWindow *window, Arena *arena, Player *player);
+
+/*
     Display the score of the player
     params:
         window: the window to display the score
@@ -162,6 +173,17 @@ void displayScore1(sf::RenderWindow *window, Arena *arena, Player *player);
         void
 */
 void displayScore2(sf::RenderWindow *window, Arena *arena, Player *player);
+
+/*
+    Display the win round 2
+    params:
+        window: the window to display the win round 2
+        arena: the arena to display the win round 2
+        player: the player to display the win round 2
+    return:
+        void
+*/
+void displayWinRound2(sf::RenderWindow *window, Arena *arena, Player *player);
 
 /*
     Display the time
@@ -234,3 +256,25 @@ void displayDraw(sf::RenderWindow *window);
         void
 */
 void displayCredit(sf::RenderWindow *window, char* text, char *fontPath, sf::Color color);
+
+/*
+    Display the round number
+    params:
+        window: the window to display the round number
+        arena: the arena to display the round number
+        round: the round number to display
+    return:
+        void
+*/
+void displayRoundNumber(sf::RenderWindow *window, Arena *arena, int round);
+
+/*
+    Display the final score
+    params:
+        window: the window to display the final score
+        player1: the player 1 to display the final score
+        player2: the player 2 to display the final score
+    return:
+        void
+*/
+void displayFinalScore(sf::RenderWindow *window, Player *player1, Player *player2);

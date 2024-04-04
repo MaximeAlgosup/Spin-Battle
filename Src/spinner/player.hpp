@@ -9,6 +9,7 @@ class Player : public Spinner {
         int level;
         sf::Color ringColor;
         char* spritePath;
+        int roundWins;
 
     public:
 
@@ -66,6 +67,15 @@ class Player : public Spinner {
         */
         sf::Color getRingColor();
 
+        /*
+            Get the number of round wins
+            params:
+                void
+            return:
+                int: number of round wins
+        */
+        int getRoundWins();
+
         // Setters
 
         /*
@@ -122,4 +132,23 @@ class Player : public Spinner {
                 void
         */
         void teleport();
+
+        /*
+            Increase the number of round wins
+            params:
+                void
+            return:
+                void
+        */
+        void increaseRoundWins();
+
+        /*
+            Reset player attributes
+            params:
+                x: x position of the spinner
+                y: y position of the spinner
+            return:
+                void
+        */
+        void reset(int x, int y);
 };

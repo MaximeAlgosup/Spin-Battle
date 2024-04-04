@@ -304,10 +304,10 @@ void Spinner::reverseDirection(){
         return -1;
     }
     else{
-        this->inertia *= 4;
-        otherSpin->inertia *= 4;
-        this->speed *= 4;
-        otherSpin->speed *= 4;
+        this->inertia *= 2;
+        otherSpin->inertia *= 2;
+        this->speed *= 2;
+        otherSpin->speed *= 2;
         this->reverseDirection();
         otherSpin->reverseDirection();
         return 0;

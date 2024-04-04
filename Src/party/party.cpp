@@ -5,6 +5,7 @@
 #include <SFML/Graphics.hpp>
 
 #define CONTACT_SOUND "../Src/assets/sounds/contact.ogg"
+#define MAX_ROUND 5
 
 Party::Party(Player *player1, Player *player2, Arena *arena, sf::RenderWindow *window){
     this->player1 = player1;
@@ -15,6 +16,7 @@ Party::Party(Player *player1, Player *player2, Arena *arena, sf::RenderWindow *w
     this->inGame = true;
     if (!buffer.loadFromFile(CONTACT_SOUND)) exit(EXIT_FAILURE);
     sound.setBuffer(buffer);
+    this->remRound = MAX_ROUND;
 }
 
 Party::Party(Player *player1, Player *player2, Arena *arena, sf::RenderWindow *window, int time){
@@ -26,18 +28,24 @@ Party::Party(Player *player1, Player *player2, Arena *arena, sf::RenderWindow *w
     this->inGame = true;
     if (!buffer.loadFromFile(CONTACT_SOUND)) exit(EXIT_FAILURE);
     sound.setBuffer(buffer);
+    this->remRound = MAX_ROUND;
 }
 
 void Party::run(Setting *settings){
     if(settings->getIsMusicOn() == true){
         this->arena->playMusic();
     }
+    round:
     auto start = std::chrono::system_clock::now();
+    this->time = 100;
+    update();
     while(this->inGame){
         // Events
         keybordEvent();
+
         // Actions
         this->arena->setSize();
+
 
         // spinner collision
         if(player1->isColliding(*player2)){
@@ -57,8 +65,10 @@ void Party::run(Setting *settings){
             }
         }
 
+
         // visual update
         update();
+
         if(time == 0){
             displayTime(window, arena, time);
             break;
@@ -89,12 +99,14 @@ void Party::run(Setting *settings){
     if(player1->getScore() > player2->getScore()){
         player1->setPosX(arena->getCenterX());
         player1->setPosY(arena->getCenterY());
+        player1->increaseRoundWins();
         update();
         win(1);
     }
     else if(player1->getScore() < player2->getScore()){
         player2->setPosX(arena->getCenterX());
         player2->setPosY(arena->getCenterY());
+        player2->increaseRoundWins();
         update();
         win(2);
     }
@@ -102,6 +114,17 @@ void Party::run(Setting *settings){
         update();
         equality();
     }
+    if(remRound > 1){
+        remRound--;
+        player1->reset(this->arena->getCenterX()+70, this->arena->getCenterY());
+        player2->reset(this->arena->getCenterX()-70, this->arena->getCenterY());
+        this->inGame = true;
+        goto round;
+    }
+    else{
+        finalResult();
+    }
+
     this->arena->stopMusic();
 }
 
@@ -112,6 +135,7 @@ void Party::keybordEvent(){
         // "close requested" event: we close the window
         if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
             inGame = false;
+            this->remRound = 0;
         }
     }
     // move player 1
@@ -225,8 +249,11 @@ void Party::update(){
     if(!player1->getIsDead()) displayPlayer(window, player1);
     if(!player2->getIsDead()) displayPlayer(window, player2);
     displayScore1(window, arena, player1);
+    displayWinRound1(window, arena, player1);
     displayScore2(window, arena, player2);
+    displayWinRound2(window, arena, player2);
     displayTime(window, arena, time);
+    displayRoundNumber(window, arena, remRound);
     // end the current frame
     window->display();  
 }
@@ -257,5 +284,16 @@ void Party::contactSound(bool isMusicOn){
     if(isMusicOn){
         sound.setVolume(200);
         sound.play();
+    }
+}
+
+void Party::finalResult(){
+    displayBackground(window, arena);
+    displayArena(window, arena);
+    displayFinalScore(window, player1, player2);
+    window->display();
+    sf::sleep(sf::milliseconds(1000));
+    while(!sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)){
+        sf::sleep(sf::milliseconds(100));
     }
 }
