@@ -4,6 +4,7 @@
 #include "player.hpp"
 #include "arena.hpp"
 #include "setting.hpp"
+#include <SFML/Audio.hpp>
 
 class Party{
     private:
@@ -13,6 +14,8 @@ class Party{
         sf::RenderWindow *window;
         int time;
         bool inGame;
+        sf::SoundBuffer buffer;
+        sf::Sound sound;
     public:
         
         /*
@@ -85,5 +88,14 @@ class Party{
                 void
         */
         void equality();
+
+        /*
+            Play the contact sound
+            params:
+                isMusicOn: the music state
+            return:
+                void
+        */
+        void contactSound(bool isMusicOn);
 
 };

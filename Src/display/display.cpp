@@ -348,7 +348,7 @@ void displayPlayer(sf::RenderWindow *window, Player *player){
     circle.setOrigin(player->getRadius(), player->getRadius());
     circle.setPosition(player->getPosX()-player->getRadius()-5, player->getPosY()-player->getRadius()-5);
     // rotate the circle
-    circle.rotate(player->getRotation()+30.f);
+    circle.rotate(player->getRotation()+167.f);
     // draw the circle
     window->draw(circle);
     player->setRotation(circle.getRotation());

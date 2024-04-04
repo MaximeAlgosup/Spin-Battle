@@ -4,6 +4,8 @@
 #include <chrono>
 #include <SFML/Graphics.hpp>
 
+#define CONTACT_SOUND "../Src/assets/sounds/contact.ogg"
+
 Party::Party(Player *player1, Player *player2, Arena *arena, sf::RenderWindow *window){
     this->player1 = player1;
     this->player2 = player2;
@@ -11,6 +13,8 @@ Party::Party(Player *player1, Player *player2, Arena *arena, sf::RenderWindow *w
     this->window = window;
     this->time = 100;
     this->inGame = true;
+    if (!buffer.loadFromFile(CONTACT_SOUND)) exit(EXIT_FAILURE);
+    sound.setBuffer(buffer);
 }
 
 Party::Party(Player *player1, Player *player2, Arena *arena, sf::RenderWindow *window, int time){
@@ -20,6 +24,8 @@ Party::Party(Player *player1, Player *player2, Arena *arena, sf::RenderWindow *w
     this->window = window;
     this->time = time;
     this->inGame = true;
+    if (!buffer.loadFromFile(CONTACT_SOUND)) exit(EXIT_FAILURE);
+    sound.setBuffer(buffer);
 }
 
 void Party::run(Setting *settings){
@@ -35,6 +41,7 @@ void Party::run(Setting *settings){
 
         // spinner collision
         if(player1->isColliding(*player2)){
+            contactSound(settings->getIsMusicOn());
             int result = player1->contact(player2);
             switch(result){
                 case 1:
@@ -246,3 +253,9 @@ void Party::equality(){
     }
 }
 
+void Party::contactSound(bool isMusicOn){
+    if(isMusicOn){
+        sound.setVolume(200);
+        sound.play();
+    }
+}
