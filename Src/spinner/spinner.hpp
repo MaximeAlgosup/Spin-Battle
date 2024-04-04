@@ -128,6 +128,24 @@ class Spinner{
         // Setters
 
         /*
+            Set the x position of the spinner
+            params:
+                x: x position of the spinner
+            return:
+                void
+        */
+        void setPosX(int x);
+
+        /*
+            Set the y position of the spinner
+            params:
+                y: y position of the spinner
+            return:
+                void
+        */
+        void setPosY(int y);
+
+        /*
             Set the rotation of the spinner
             params:
                 rotation: rotation of the spinner

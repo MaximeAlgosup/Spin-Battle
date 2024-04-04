@@ -38,8 +38,7 @@ char fontPath[] = "../Src/assets/fonts/LoveDays-2v7Oe.ttf";
 int main()
 {
     // init window
-    // sf::RenderWindow window(sf::VideoMode(1920, 1080), TITLE, sf::Style::Fullscreen);
-    sf::RenderWindow window(sf::VideoMode(1920, 1080), TITLE);
+    sf::RenderWindow window(sf::VideoMode(1920, 1080), TITLE, sf::Style::Fullscreen);
 
     // init menu
     Menu menu(menuTitle, menuBackgroundPath, fontPath, sf::Color{39, 1, 0, 255}, menuMusicPath);
@@ -55,8 +54,8 @@ int main()
         Arena arena((window.getSize().x/2), (window.getSize().y/2), ARENA_RADIUS, 1, 0, ThemePath, stadiumPath, fontPath, sf::Color::White, arenaMusicPath);
 
         // init players
-        Player player1(arena.getCenterX()+70, arena.getCenterY(), 15, 15, 10000, 5, sf::Color::Red, player1SpritePath);
-        Player player2(arena.getCenterX()-70, arena.getCenterY(), 15, 15, 10000, 5, sf::Color::Blue, player2SpritePath);
+        Player player1(arena.getCenterX()+70, arena.getCenterY(), 15, 30, 15000, 30, sf::Color::Red, player1SpritePath);
+        Player player2(arena.getCenterX()-70, arena.getCenterY(), 15, 30, 15000, 30, sf::Color::Blue, player2SpritePath);
 
 
         // init select menu

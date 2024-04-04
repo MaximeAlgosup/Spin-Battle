@@ -113,4 +113,13 @@ class Player : public Spinner {
                 void
         */
         void levelUp();
+
+        /*
+            Teleport the spinner
+            params:
+                void
+            return:
+                void
+        */
+        void teleport();
 };

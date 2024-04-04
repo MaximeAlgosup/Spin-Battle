@@ -2,6 +2,9 @@
 #include <fstream>
 #include <iostream>
 
+#define TELEPORTATION_COST 50
+#define TELEPORTATION_RANGE 100
+
 Player::Player(unsigned int x, unsigned int y, int w, int s, int i, int a, sf::Color rc, char* spritePath) : Spinner(x, y, w, s, i, a) {
     this->score = 0;
     this->ringColor = rc;
@@ -52,4 +55,43 @@ void Player::resetScore(){
 
 void Player::levelUp(){
     this->level++;
+}
+
+void Player::teleport(){
+    if(this->score >= TELEPORTATION_COST){
+        this->score -= TELEPORTATION_COST;
+        switch (this->direction)
+        {
+        case UP:
+            this->setPosY(this->getPosY() - TELEPORTATION_RANGE);
+            break;
+        case DOWN:
+            this->setPosY(this->getPosY() + TELEPORTATION_RANGE);
+            break;
+        case LEFT:
+            this->setPosX(this->getPosX() - TELEPORTATION_RANGE);
+            break;
+        case RIGHT:
+            this->setPosX(this->getPosX() + TELEPORTATION_RANGE);
+            break;
+        case UP_LEFT:
+            this->setPosX(this->getPosX() - TELEPORTATION_RANGE);
+            this->setPosY(this->getPosY() - TELEPORTATION_RANGE);
+            break;
+        case UP_RIGHT:
+            this->setPosX(this->getPosX() + TELEPORTATION_RANGE);
+            this->setPosY(this->getPosY() - TELEPORTATION_RANGE);
+            break;
+        case DOWN_LEFT:
+            this->setPosX(this->getPosX() - TELEPORTATION_RANGE);
+            this->setPosY(this->getPosY() + TELEPORTATION_RANGE);
+            break;
+        case DOWN_RIGHT:
+            this->setPosX(this->getPosX() + TELEPORTATION_RANGE);
+            this->setPosY(this->getPosY() + TELEPORTATION_RANGE);
+            break;        
+        default:
+            break;
+        }
+    }
 }

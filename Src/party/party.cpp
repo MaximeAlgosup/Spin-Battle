@@ -50,6 +50,12 @@ void Party::run(Setting *settings){
             }
         }
 
+        // visual update
+        update();
+        if(time == 0){
+            displayTime(window, arena, time);
+            break;
+        }
         // Check if the spinner is out of the arena
         if(player1->isOut(arena->getCenterX(), arena->getCenterY(), arena->getRadius())){
             player1->setDead(true);
@@ -72,20 +78,21 @@ void Party::run(Setting *settings){
                 time--;
             }
         }
-        // visual update
-        update();
-        if(time == 0){
-            displayTime(window, arena, time);
-            break;
-        }
     }
     if(player1->getScore() > player2->getScore()){
+        player1->setPosX(arena->getCenterX());
+        player1->setPosY(arena->getCenterY());
+        update();
         win(1);
     }
     else if(player1->getScore() < player2->getScore()){
+        player2->setPosX(arena->getCenterX());
+        player2->setPosY(arena->getCenterY());
+        update();
         win(2);
     }
     else{
+        update();
         equality();
     }
     this->arena->stopMusic();
@@ -146,6 +153,9 @@ void Party::keybordEvent(){
             player1->moveDown();
         }
     }
+    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::RControl)){
+        player1->teleport();
+    }
     // move player 2
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::W) && sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
         // Check if the spinner is out of the screen
@@ -192,6 +202,9 @@ void Party::keybordEvent(){
             player2->moveDown();
         }
     }
+    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q)){
+        player2->teleport();
+    }
     
     player1->autoMove();
     player2->autoMove();
@@ -202,8 +215,8 @@ void Party::update(){
     // Draws
     displayBackground(window, arena);
     displayArena(window, arena);
-    displayPlayer(window, player1);
-    displayPlayer(window, player2);
+    if(!player1->getIsDead()) displayPlayer(window, player1);
+    if(!player2->getIsDead()) displayPlayer(window, player2);
     displayScore1(window, arena, player1);
     displayScore2(window, arena, player2);
     displayTime(window, arena, time);

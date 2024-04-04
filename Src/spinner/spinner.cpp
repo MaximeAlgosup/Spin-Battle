@@ -2,6 +2,8 @@
 #include <cmath>
 #include <iostream>
 
+#define ACCEL 2
+
 Spinner::Spinner(unsigned int x, unsigned int y, int w, int s, int i, int a) {
     this->pos_x = x;
     this->pos_y = y;
@@ -58,6 +60,14 @@ float Spinner::getRotation(){
 
 // Setters
 
+void Spinner::setPosX(int x){
+    this->pos_x = x;
+}
+
+void Spinner::setPosY(int y){
+    this->pos_y = y;
+}
+
 void Spinner::setRotation(float rotation){
     this->rotation = rotation;
 }
@@ -69,7 +79,7 @@ void Spinner::moveUp(){
         return;
     }
     if(this->speed < this->maxSpeed){
-        this->speed += 1;
+        this->speed += ACCEL;
     }
     this->pos_y -= this->speed;
     this->direction = UP;
@@ -85,7 +95,7 @@ void Spinner::moveDown(){
         return;
     }
     if(this->speed < this->maxSpeed){
-        this->speed += 1;
+        this->speed += ACCEL;
     }
     this->pos_y += this->speed;
     this->direction = DOWN;
@@ -101,7 +111,7 @@ void Spinner::moveLeft(){
         return;
     }
     if(this->speed < this->maxSpeed){
-        this->speed += 1;
+        this->speed += ACCEL;
     }
     this->pos_x -= this->speed;
     this->direction = LEFT;
@@ -117,7 +127,7 @@ void Spinner::moveRight(){
         return;
     }
     if(this->speed < this->maxSpeed){
-        this->speed += 1;
+        this->speed += ACCEL;
     }
     this->pos_x += this->speed;
     this->direction = RIGHT;
@@ -133,7 +143,7 @@ void Spinner::moveUpRight(){
         return;
     }
     if(this->speed < this->maxSpeed){
-        this->speed += 1;
+        this->speed += ACCEL;
     }
     this->pos_y -= this->speed;
     this->pos_x += this->speed;
@@ -150,7 +160,7 @@ void Spinner::moveUpLeft(){
         return;
     }
     if(this->speed < this->maxSpeed){
-        this->speed += 1;
+        this->speed += ACCEL;
     }
     this->pos_y -= this->speed;
     this->pos_x -= this->speed;
@@ -167,7 +177,7 @@ void Spinner::moveDownRight(){
         return;
     }
     if(this->speed < this->maxSpeed){
-        this->speed += 1;
+        this->speed += ACCEL;
     }
     this->pos_y += this->speed;
     this->pos_x += this->speed;
@@ -184,7 +194,7 @@ void Spinner::moveDownLeft(){
         return;
     }
     if(this->speed < this->maxSpeed){
-        this->speed += 1;
+        this->speed += ACCEL;
     }
     this->pos_y += this->speed;
     this->pos_x -= this->speed;
@@ -324,6 +334,22 @@ bool Spinner::isColliding(Spinner otherSpin){
                 break;
             case RIGHT:
                 this->pos_x -= contactSize;
+                break;
+            case UP_RIGHT:
+                this->pos_y += contactSize;
+                this->pos_x -= contactSize;
+                break;
+            case UP_LEFT:
+                this->pos_y += contactSize;
+                this->pos_x += contactSize;
+                break;
+            case DOWN_RIGHT:
+                this->pos_y -= contactSize;
+                this->pos_x -= contactSize;
+                break;
+            case DOWN_LEFT:
+                this->pos_y -= contactSize;
+                this->pos_x += contactSize;
                 break;
             default:
                 break;
