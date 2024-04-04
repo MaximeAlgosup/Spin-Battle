@@ -2,7 +2,7 @@
 #include <fstream>
 #include <iostream>
 
-#define TELEPORTATION_COST 50
+#define TELEPORTATION_COST 10   
 #define TELEPORTATION_RANGE 100
 
 Player::Player(unsigned int x, unsigned int y, int w, int s, int i, int a, sf::Color rc, char* spritePath) : Spinner(x, y, w, s, i, a) {
